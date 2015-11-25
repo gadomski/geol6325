@@ -1,19 +1,23 @@
 library(ggplot2)
-library(grid)
+library(reshape2)
 
-theme_nothing <- function(base_size = 12, base_family = "Helvetica")
-{
-  theme_bw(base_size = base_size, base_family = base_family) %+replace%
-    theme(
-      rect             = element_blank(),
-      line             = element_blank(),
-      text             = element_blank(),
-      axis.ticks.margin = unit(0, "lines")
-    )
-}
+reference <- c(2, 2, 1, 2, 5, 18, 51, 107, 166, 195, 176, 125, 70, 34, 14, 7, 5, 4, 5, 4, 3, 1, 0, 0)
+low <- c(3, 3, 2, 1, 0, 1, 1, 1, 1, 2, 2, 2, 2, 2, 4, 15, 50, 119, 194, 243, 255, 255, 217, 158, 97, 54, 30, 23, 20, 20, 18, 19, 20, 19, 17, 15, 13, 11, 12, 11, 10, 10, 10, 9, 10, 10, 10, 9, 11, 14, 27, 47, 66, 69, 54, 34, 19, 12, 9, 8, 7, 8, 12, 18, 28, 35, 34, 26, 16, 11, 15, 33, 64, 94, 105, 89, 58, 30, 14, 9, 7, 7, 7, 9, 9, 9, 7, 6, 5, 5, 6, 6, 6, 6, 5, 5, 4, 3, 4, 4)
+high <- c(2, 2, 1, 1, 1, 1, 2, 2, 2, 2, 3, 1, 1, 2, 4, 11, 29, 53, 74, 81, 73, 54, 34, 17, 8, 3, 3, 4, 4, 3, 2, 2, 2, 2, 2, 2, 3, 5, 4, 4, 3, 2, 1, 2, 1, 2, 1, 1, 2, 3, 4, 5, 6, 5, 4, 2, 3, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 3, 3, 4, 5, 4, 4, 3, 1, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1)
 
-x <- seq(-5, 5, 0.01)
-y <- exp(-x^2)
-df <- data.frame(x=x, y=y)
-ggplot(df, aes(x, y)) + geom_line(colour="red") + theme_nothing()
-ggsave("images/pulse.png", width=20, height=20, units="mm", bg = "transparent")
+df <- data.frame(reference=reference, time=seq(0, length(reference) - 1) * 1e-9)
+ggplot(df, aes(time, reference)) +
+  geom_line() +
+  geom_point() + 
+  xlab("Time from the start of record in seconds") + 
+  ylab("Intensity")
+ggsave("images/reference-pulse.png")
+
+df <- data.frame(low=low, high=high, time=seq(0, length(low) - 1) * 1e-9)
+df.melt <- melt(df, id.vars="time", variable.name="Channel")
+p <- ggplot(df.melt, aes(time, value, color=Channel)) +
+  geom_point() +
+  geom_line() +
+  xlab("Time from the start of record in seconds") +
+  ylab("Intensity")
+ggsave("images/return-pulse.png")

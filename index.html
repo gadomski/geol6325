@@ -42,11 +42,10 @@ body { position: relative; margin-bottom: 60px; }
         </div>
       </div>
 
-      <h1>LiDAR basics</h1>
+      <h1>LiDAR</h1>
 
       <div class="row">
-        <div class="col-lg-8">
-
+        <div class="col-md-8 col-xs-12">
           <p>
             LiDAR sensors use laser energy to measure the distance between a sensor and a reflective target; the most common type uses the two-way travel time of a pulse of laser energy to cacluate a range.
 
@@ -74,7 +73,7 @@ body { position: relative; margin-bottom: 60px; }
           </p>
         </div>
 
-        <div class="col-lg-4">
+        <div class="col-md-4 col-md-offset-0 col-sm-8 col-sm-offset-2 col-xs-12">
           <div class="thumbnail">
             <div class="caption">
               <h4>LiDAR internals</h4>
@@ -89,10 +88,109 @@ body { position: relative; margin-bottom: 60px; }
         </div>
       </div>
 
-        
+      <h2>Full-waveform LiDAR</h2>
+
       <div class="row">
-        <div class="col-lg-4 col-lg-offset-1">
+        <div class="col-xs-12">
+          <p>
+            The idea that LiDAR scanners measure points in space is a bit of a simplification.
+            To see why, you need to know a bit about how the energy returned to a LiDAR scanner is actually measured.
+          </p>
+
+          <p>
+            When laser energy bounces off of a target and returns to the scanner, it passes back through some optics until it hits one or more more detectors.<sup id="fnref:3"><a href="#fn:3">3</a></sup>
+            These detectors are very similar to those that exist in your digital camera — they record the intensity of the incident energy on the detector.
+            The detectors in a LiDAR system are hooked up to some very precise timing machinery that records the time of the data sample with about a nanosecond resolution.
+            This produces a timeseries of samples of the incident energy on the scanner's detector.
+          </p>
+
+          <p>
+            Some examples of real-world waveform data are shown below.
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 col-xs-12">
           <div class="thumbnail">
+            <img src="images/reference-pulse.png" alt="reference pulse">
+            <div class="caption">
+              <h3>Reference pulse</h3>
+              <p>The energy of the laser pulse as it leaves the scanner.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-xs-12">
+          <div class="thumbnail">
+            <img src="images/return-pulse.png" alt="reference pulse">
+            <div class="caption">
+              <h3>Return pulse</h3>
+              <p>
+                The energy of the laser pulse as it returns to the scanner.
+                The scanner that collected these data has two channels, high and low, one which is more sensitive than the other.
+                Notice the multiple peaks in the low channel, indicating that this laser pulse interacted with multiple targets.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <p>
+          Turning these full waveform data samples into points is a bit of a tricky problem.
+          You can use the local maximums of the return data, but that can have trouble in cluttered or otherwise non-ideal environments.
+          Many people use a Gaussian decomposition to turn the returned waveform into the summation of several Gaussian pulses, but that is imperfect if the outgoing laser energy isn't Gaussian (which it usually isn't).
+          </p>
+
+          <p>
+            For this work, we use a simple peak detection method to convert our full waveform data to discrete points.
+            We would have loved to implement a full Gaussian decomposition, but we ran out of time.
+          </p>
+        </div>
+      </div>
+
+      <h2>Error propagation</h2>
+
+      <div class="row">
+        <div class="col-md-6 col-xs-12">
+          <p>
+            As you're seeing, there are a lot of components that go into collecting a single LiDAR measurement, and each one of these components has an associated uncertainty of measurement.
+            Turning our full waveform data into points has uncertainty.
+            The measured angle of the mirror when the laser pulse is emitted has uncertainty.
+            The position and attitude of the plane has uncertainty.
+            All of these factors contribute to some percentage of the total uncertainty in the final x-y-z coordinates of our LiDAR points.
+          </p>
+
+          <p>
+            When we compute the uncertainty of a computed quantity, the usual procedure is to use the General Law for the Propagation of Variances.
+            If $f$ is a function of $x_0$, $x_1$, ..., then the GLOPV can be described by Equation 3.
+          </p>
+
+          <p>
+            If $f$ is non-linear, as our georeferencing equation is, then those partial derivatives will probably bit a bit tricky to compute.
+            The common practice is to linearize the equation by taking the Taylor series expansion and truncating it at the first term.
+            This allows us to compute the incremental changes in our final position due to incremental changes in each of our measured components.
+          </p>
+
+          <p>
+            For our work, we linearized the georeferencing equation (Equation 2) and propagated each component error to our final computed quantities.
+          </p>
+        </div>
+
+        <div class="col-md-6 col-xs-12">
+          <h4>The General Law for the Propagation of Variance</h4>
+          <p>
+          $$ f\left(x_0, x_1, ...\right) \\ \sigma_f^2 = \left( \frac {\delta f} {\delta x_0} \sigma_{x_0} \right)^2 + \left( \frac {\delta f} {\delta x_1} \sigma_{x_1} \right)^2 + ... $$
+          </p>
+        </div>
+      </div>
+
+      <h1>Snow depths</h1>
+
+      <div class="row">
+        <div class="col-md-4 col-xs-12">
+          <div class="thumbnail">
+            <img src="images/snow-depth.svg" alt="snow depth">
             <div class="caption">
               <h4>Calculating snow depth from two LiDAR scans</h4>
 
@@ -101,8 +199,13 @@ body { position: relative; margin-bottom: 60px; }
                 Because points are unordered, a snow-on point will probably not have a snow-free point directly beneath it; use an interpolation method to calculate a snow-free height for each snow-on point.
               </p>
             </div>
-            <img src="images/snow-depth.svg" alt="snow depth">
           </div>
+        </div>
+        <div class="col-md-8 col-xs-12">
+          <p>
+            We can calculate a snow depth by comparing two georeferenced LiDAR scans &mdash; one scan with snow and the other without.
+            We used data from the Airborne Snow Observatory (ASO)<sup id="fnref:4"><a href="#fn:4">4</a></sup>
+          </p>
         </div>
       </div>
 
@@ -113,13 +216,18 @@ body { position: relative; margin-bottom: 60px; }
           Glennie, C. L. (2007). Rigorous 3D error analysis of kinematic scanning LIDAR systems. Journal of Applied Geodesy, 1(3).
           <a href="#fnref:1" title="return to content"> &#8617;</a>
         </li>
-        <li id="fn2">
+        <li id="fn:2">
           Since LiDAR points are not collected at evenly spaced intervals in time, GNSS/IMU measurements must be interpolated.
           <a href="#fnref:2" title="return to content"> &#8617;</a>
         </li>
         <li id="fn:3">
-          <a href="http://aso.jpl.nasa.gov/">http://aso.jpl.nasa.gov/</a>
+           The scanner that we used has two channels, one which is more sensitive than the other. 
+           This is to provide a wider dynamic range for signal detection.
           <a href="#fnref:3" title="return to content"> &#8617;</a>
+        </li>
+        <li id="fn:4">
+          <a href="http://aso.jpl.nasa.gov/">http://aso.jpl.nasa.gov/</a>
+          <a href="#fnref:4" title="return to content"> &#8617;</a>
         </li>
       </ol>
     </div>
