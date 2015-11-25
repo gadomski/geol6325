@@ -28,11 +28,24 @@ body { position: relative; }
       </div>
 
       <div class="row">
-        <div class="col-lg-7">
+        <div class="col-xs-10 col-xs-offset-1">
           <p class="lead">
             Using LiDAR sensors, we collect high resolution spatial data over large regions.
-            For snow-covered terrain, a pair of LiDAR surveys, one taken when the area was snow-free and the other when it was snow-covered, can be used to calculate snow depths.
+            We collected a pair of LiDAR surveys, one when the area was snow-free and the other when it was snow-covered, and calculated snow depths.
+            We then coupled these snow depths with snow density measurements to produce snow water equivalent (SWE) measurements.
           </p>
+
+          <p class="lead">
+            Each measurement used to calculate the final SWE values contains error.
+            We propagate these measurement errors through georegistration and post-processing, and provide SWE values with uncertainty estimates.
+          </p>
+        </div>
+      </div>
+
+      <h1>LiDAR basics</h1>
+
+      <div class="row">
+        <div class="col-lg-8">
 
           <p>
             LiDAR sensors use laser energy to measure the distance between a sensor and a reflective target; the most common type uses the two-way travel time of a pulse of laser energy to cacluate a range.
@@ -48,12 +61,23 @@ body { position: relative; }
             In order to measure points in two dimensions, scanners use a rotating or oscillating mirror to redirect the laser energy.
             A full three dimensions of measurement are enabled by moving the mirror in space, as in the case in mobile and airborne scanning, or rotating it around another axis, as is the case with terrestrial scanning.
           </p>
+
+          <p>
+            Even though we mount a LiDAR scanner on a moving platform, the scanner itself still only measures the range to a target.
+            These range measurements must be combined with position and attitude information to get an x-y-z point in a global reference frame, in a process called <strong>georegistration</strong> or <strong>georeferencing</strong>.
+            The LiDAR georeferencing equation is well-established<sup id="fnref:1"><a href="#fn:1">1</a></sup>:
+
+            $$ X_{g} = X_{gnss} + R_{imu} \left( R_{boresight} X_{scanner} + X_{lever arm} \right) $$
+
+            where $X_{g}$ is the final point in a global reference frame, $X_{gnss}$ is the position of the GNSS receiver in the global reference frame, $R_{imu}$ is the rotation matrix for the Interital Motion Unit (IMU), $R_{boresight}$ is the rotation matrix of the rotation displacement between the IMU and the LiDAR scanner, $X_{scanner}$ is the scanned point in the Scanner's Own Coordinate System (SOCS), and $X_{lever arm}$ is the positional displacement between the GNSS receiver and the LiDAR scanner's origin.
+            Creating a georeferenced point cloud from mobile LiDAR data is then a matter of mounting a GNSS/IMU unit rigidly to the same body as the scanner and applying the georeferencing equation to each LiDAR point.<sup id="fnref:2"><a href="#fn:2">2</a></sup>.
+          </p>
         </div>
 
-        <div class="col-lg-4 col-lg-offset-1">
+        <div class="col-lg-4">
           <div class="thumbnail">
             <div class="caption">
-              <h4>LiDAR basics</h4>
+              <h4>LiDAR internals</h4>
 
               <p>
                 The laser source transmits pulses of laser energy, which are reflected by the rotating polygonal mirror and bounce off of a target.
@@ -63,7 +87,10 @@ body { position: relative; }
             <img src="images/lidar-schematic.svg" alt="snow depth">
           </div>
         </div>
+      </div>
 
+        
+      <div class="row">
         <div class="col-lg-4 col-lg-offset-1">
           <div class="thumbnail">
             <div class="caption">
@@ -86,9 +113,13 @@ body { position: relative; }
           Glennie, C. L. (2007). Rigorous 3D error analysis of kinematic scanning LIDAR systems. Journal of Applied Geodesy, 1(3).
           <a href="#fnref:1" title="return to content"> &#8617;</a>
         </li>
-        <li id="fn:2">
-          <a href="http://aso.jpl.nasa.gov/">http://aso.jpl.nasa.gov/</a>
+        <li id="fn2">
+          Since LiDAR points are not collected at evenly spaced intervals in time, GNSS/IMU measurements must be interpolated.
           <a href="#fnref:2" title="return to content"> &#8617;</a>
+        </li>
+        <li id="fn:3">
+          <a href="http://aso.jpl.nasa.gov/">http://aso.jpl.nasa.gov/</a>
+          <a href="#fnref:3" title="return to content"> &#8617;</a>
         </li>
       </ol>
     </div>
