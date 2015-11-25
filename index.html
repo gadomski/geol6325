@@ -28,120 +28,38 @@ body { position: relative; }
       </div>
 
       <div class="row">
-        <div class="col-lg-8 col-lg-offset-2">
-          <p>
-          Pulse-based LiDAR sensors are one effective tool for measuring topography over large geographic regions.
-          When mounted on airborne platforms and integrated with Inertial Motion Units and GNSS systems, LiDAR systems can provide sub-meter spatial resolution topographic data with accuracy on the order of several centimeters.<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>
+        <div class="col-lg-7">
+          <p class="lead">
+            Using LiDAR sensors, we collect high resolution spatial data over large regions.
+            For snow-covered terrain, a pair of LiDAR surveys, one taken when the area was snow-free and the other when it was snow-covered, can be used to calculate snow depths.
           </p>
 
           <p>
-          When using airborne LiDAR data, many practitioners disregard the uncertainty associated with the spatial coordinates of each LiDAR point; most commercial software products do not provide per-point uncertainty values, and manual calculation of these uncertainties is beyond the ability of most LiDAR data consumers.
-          We present open-source software tools for calculating these per-point uncertainties, and we demonstrate their utility by propagating per-point uncertainties through to final data products.
-          Specifically, we use airborne LiDAR data from the Airborne Snow Observatory<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup> to calculate snow depths and associated uncertainties; we also use snow density data to calculate snow-water equivalent values over a large region in southwest Colorado.
+            LiDAR sensors use laser energy to measure the distance between a sensor and a reflective target; the most common type uses the two-way travel time of a pulse of laser energy to cacluate a range.
+
+            $$ range = c \frac {t} {2} $$
+
+            where $c$ is the speed of light and $t$ is the two-way travel time of the laser pulse.
+            When mounted to a mobile platform such as an aircraft, a LiDAR scanner can provide a large number of range measurements that cover a large spatial area.
           </p>
         </div>
-      </div>
 
-
-      <h2 id="pulse-based-lidar">Pulsed-based LiDAR</h2>
-
-      <div class="row">
-        <div class="col-lg-6">
-          <p>
-          <abbr title="Light Detection And Ranging" class="initialism">LiDAR</abbr> stands for "Light Detection and Ranging".
-          LiDAR systems include a broad spectrum of devices with many modes of operation, but at their core all LiDAR systems use the properties of light to measure distances.
-          Some LiDAR sensors use the modulation of laser energy to calculate distances from interferometry; others use the two-way travel time of pulses of laser energy.
-          We will focus on pulse-based systems.
-          </p>
-
-          <p>
-          If we know the time of flight $t$ for a single laser pulse, we can calculate the distance $d$ to the reflective target, using the speed of light $c$:
-          $$ d = \frac {t}{2} c $$
-          </p>
-
-          <p>
-          In order to collect many distance measurements from many reflective surfaces, the pulses of laser energy must be directed at many targets.
-          Most LiDAR scanners use spinning or oscillating mirrors to direct the laser energy in one dimension.
-          For ground-based LiDAR scanners, called Terrestrial Laser Scanners or <abbr title="Terrestiral Laser Scanners" class="initialism">TLS</abbr>, the laser energy is then directed in a second dimension using a rotating scanner head.
-          Laser scanners can also collect data in all dimensions by mounting them on moving platforms, such as vehicles, airplanes, satellites, and unmanned areal vehicles; these mobile systems, particularity Airborne Laser Scanners (<abbr title="Airborne Laser Scanners">ALS</abbr>), are the focus of this research.
-          </p>
-
-        </div>
-        <div class="col-lg-6">
+        <div class="col-lg-4 col-lg-offset-1">
           <div class="thumbnail">
-            <img src="images/lidar-pulse.gif" alt="demonstration of lidar pulse">
             <div class="caption">
+              <h4>Calculating snow depth from two LiDAR scans</h4>
+
               <p>
-              A pulse-based LiDAR system.
-              The laser pulse reflects off of the tree and is detected by the scanner.
-              The time between pulse emission and detection can be used to calculate the distance between the scanner and the reflective object.
+                Subtract the height of the snow-on scan from the point height of the snow-free scan.
+                Because points are unordered, a snow-on point will probably not have a snow-free point directly beneath it; use an interpolation method to calculate a snow-free height for each snow-on point.
               </p>
             </div>
+            <img src="images/snow-depth.svg" alt="snow depth">
           </div>
         </div>
-
       </div>
 
-      <h2 id="georeferencing">Georeferencing</h2>
-
-      <p>
-      A LiDAR system with a rotating or oscillating mirror measures in two dimensions &mdash; the range from the scanner to the target, and the angle of the mirror.
-      In order to produce three dimensional data in a global reference frame, each range measurement must be <mark>georeferenced</mark>, or correctly located in a three-dimensional reference system using additional positional and rotation information.
-      Mobile and airborne LiDAR systems use two sets of technologies to ascertain the position and orientation of the LiDAR scanner:
-
-      </p>
-      <ul>
-        <li>Global Navigation Satellite System, or <mark>GNSS</mark>, which provides the x-y-z position of a point in a global reference system.</li>
-        <li>Intertial Motion Unit, or <mark>IMU</mark>, which provides roll, pitch, and heading.</li>
-      </ul>
-
-      <p>
-      Many manufacturers produce a combined IMU/GNSS unit that can be mounted on a moving vehicle, such as a plane, submarine, or boat.
-      If a LiDAR scanning system and a IMU/GNSS are mounted rigidly together and the positional and rotational offsets between the units is known, the IMU/GNSS can be used to georeference each LiDAR point to produce a three-dimensional point cloud.
-      In equation form:<sup><a href="#fn:1">1</a></sup>
-
-      $$ X_G = X_{GNSS} + R_{IMU} \left( R_b r + L \right) $$
-
-      where $r$ is the measured LiDAR point in the scanner's own coordinate frame, $R_b$ is the rotational offset between the scanner and the IMU/GNSS, $L$ is the positional offset between the scanner and the IMU/GNSS, $R_{IMU}$ is the rotation of the IMU, $X_{GNSS}$ is the position of the GNSS, and $X_G$ is the georeferenced LiDAR point.
-      Rotations are provided as <a href="https://en.wikipedia.org/wiki/Rotation_matrix">rotation matrices</a>.
-      </p>
-
-      <p>
-      This georeferencing equation is used by commercial and open-source software to produce 3D point clouds from airborne LiDAR scanner and IMU/GNSS data.
-      </p>
-
-      <h2 id="point-uncertainty">Point uncertainty</h2>
-
-      <p class="lead">
-      No measurement is perfect.
-      All measurements have an associated uncertainty.
-      </p>
-
-      <p>
-      In our georeferencing equation, there are fourteen unknowns:
-      </p>
-
-      <ul>
-        <li>The range and angle of the LiDAR measurement.</li>
-        <li>The roll, pitch, and heading offset between the LiDAR scanner and the IMU.</li>
-        <li>The x, y, and z offset between the GNSS and the IMU.</li>
-        <li>The roll, pitch, and heading as calculated by the IMU.</li>
-        <li>The x, y, and z position of the GNSS.</li>
-      </ul>
-
-      <p>
-      Each of these are measured values, and so they have an associated uncertainty.
-      In fact, some values (e.g. the GNSS x, y, and z positions) are correlated, so not only does the x and y positions of a GNSS point have associated uncertainty, but the uncertainty in the x and y positions are correlated.
-      If we want to express the uncertainty in the position of a single georeferenced LiDAR point, we need to propagate the uncertainty of each of hte fourteen component measurements through to $X_G$, using the <a href="https://en.wikipedia.org/wiki/Propagation_of_uncertainty">general law for the propagation of variance</a>.
-      </p>
-
-      <p>
-      Since equation 2 is non-linear, we can approximate uncertainty of $X_G$ by truncating the <a href="https://en.wikipedia.org/wiki/Taylor_series">Taylor series</a> expansion of the georeferencing equation after the first term, then using that truncation in our error calculations.
-      This produces an involved-looking equation (elided) that is a expression of the per-point error of a georeferenced LiDAR point.
-
-      </p>
-
-      <h2>References</h2>
+      <h1>References</h1>
 
       <ol>
         <li id="fn:1">
