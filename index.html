@@ -67,10 +67,10 @@ body { position: relative; margin-bottom: 60px; }
             These range measurements must be combined with position and attitude information to get an x-y-z point in a global reference frame, in a process called <strong>georegistration</strong> or <strong>georeferencing</strong>.
             The LiDAR georeferencing equation is well-established<sup id="fnref:1"><a href="#fn:1">1</a></sup>:
 
-            $$ X_{g} = X_{gnss} + R_{imu} \left( R_{boresight} X_{scanner} + X_{lever arm} \right) $$
+            $$ \mathbf{X}_{g} = \mathbf{X}_{gnss} + \mathbf{R}_{imu} \left( \mathbf{R}_{boresight} \mathbf{X}_{scanner} + \mathbf{X}_{lever arm} \right) $$
 
-            where $X_{g}$ is the final point in a global reference frame, $X_{gnss}$ is the position of the GNSS receiver in the global reference frame, $R_{imu}$ is the rotation matrix for the Interital Motion Unit (IMU), $R_{boresight}$ is the rotation matrix of the rotation displacement between the IMU and the LiDAR scanner, $X_{scanner}$ is the scanned point in the Scanner's Own Coordinate System (SOCS), and $X_{lever arm}$ is the positional displacement between the GNSS receiver and the LiDAR scanner's origin.
-            Creating a georeferenced point cloud from mobile LiDAR data is then a matter of mounting a GNSS/IMU unit rigidly to the same body as the scanner and applying the georeferencing equation to each LiDAR point.<sup id="fnref:2"><a href="#fn:2">2</a></sup>.
+            where $\mathbf{X}_{g}$ is the final point in a global reference frame, $\mathbf{X}_{gnss}$ is the position of the GNSS receiver in the global reference frame, $\mathbf{R}_{imu}$ is the rotation matrix for the Interital Motion Unit (IMU), $\mathbf{R}_{boresight}$ is the rotation matrix of the rotation displacement between the IMU and the LiDAR scanner, $\mathbf{X}_{scanner}$ is the scanned point in the Scanner's Own Coordinate System (SOCS), and $\mathbf{X}_{lever arm}$ is the positional displacement between the GNSS receiver and the LiDAR scanner's origin.
+            Creating a georeferenced point cloud from mobile LiDAR data is then a matter of mounting a GNSS/IMU unit rigidly to the same body as the scanner and applying the georeferencing equation to each LiDAR point.<sup id="fnref:2"><a href="#fn:2">2</a></sup>
           </p>
         </div>
 
@@ -153,7 +153,7 @@ body { position: relative; margin-bottom: 60px; }
       <h2>Error propagation</h2>
 
       <div class="row">
-        <div class="col-md-6 col-xs-12">
+        <div class="col-xs-12">
           <p>
             As you're seeing, there are a lot of components that go into collecting a single LiDAR measurement, and each one of these components has an associated uncertainty of measurement.
             Turning our full waveform data into points has uncertainty.
@@ -163,25 +163,21 @@ body { position: relative; margin-bottom: 60px; }
           </p>
 
           <p>
-            When we compute the uncertainty of a computed quantity, the usual procedure is to use the General Law for the Propagation of Variances.
-            If $f$ is a function of $x_0$, $x_1$, ..., then the GLOPV can be described by Equation 3.
-          </p>
+            When we compute the uncertainty of a computed quantity, the usual procedure is to use the General Law for the Propagation of Variances.<sup id="fnref:4"><a href="#fn:4">4</a></sup>
+            We compute a 3x3 covariance matrix $\mathbf{C}$ for each point using the following relationships:
 
-          <p>
-            If $f$ is non-linear, as our georeferencing equation is, then those partial derivatives will probably bit a bit tricky to compute.
-            The common practice is to linearize the equation by taking the Taylor series expansion and truncating it at the first term.
-            This allows us to compute the incremental changes in our final position due to incremental changes in each of our measured components.
-          </p>
+            $$ 
+            \mathbf{C} = 
+              \begin{bmatrix}
+                \sigma_x^2 & \sigma_{xy} & \sigma_{xz} \\
+                \sigma_{xy} & \sigma_y^2 & \sigma_{yz} \\
+                \sigma_{xz} & \sigma_{yz} & \sigma_z^2
+              \end{bmatrix}
+              = \mathbf{A} \mathbf{C}_l \mathbf{A}^T
+            $$
 
-          <p>
-            For our work, we linearized the georeferencing equation (Equation 2) and propagated each component error to our final computed quantities.
-          </p>
-        </div>
-
-        <div class="col-md-6 col-xs-12">
-          <h4>The General Law for the Propagation of Variance</h4>
-          <p>
-          $$ f\left(x_0, x_1, ...\right) \\ \sigma_f^2 = \left( \frac {\delta f} {\delta x_0} \sigma_{x_0} \right)^2 + \left( \frac {\delta f} {\delta x_1} \sigma_{x_1} \right)^2 + ... $$
+            where $\mathbf{A}$ is the <em>Jacobian</em> matrix of the partial derivatives of the Taylor series expansion of Equation 3, truncated at the first term, and $\mathbf{C}_l$ is the covariance matrix of variances and covariances for each observed quanity.
+              
           </p>
         </div>
       </div>
@@ -205,7 +201,7 @@ body { position: relative; margin-bottom: 60px; }
         <div class="col-md-8 col-xs-12">
           <p>
             We can calculate a snow depth by comparing two georeferenced LiDAR scans &mdash; one scan with snow and the other without.
-            We used data from the Airborne Snow Observatory (ASO)<sup id="fnref:4"><a href="#fn:4">4</a></sup>
+            We used data from the Airborne Snow Observatory (ASO)<sup id="fnref:5"><a href="#fn:5">5</a></sup>
           </p>
         </div>
       </div>
@@ -226,8 +222,12 @@ body { position: relative; margin-bottom: 60px; }
           <a href="#fnref:3" title="return to content"> &#8617;</a>
         </li>
         <li class="footnote" id="fn:4">
-          <a href="http://aso.jpl.nasa.gov/">http://aso.jpl.nasa.gov/</a>
+          Ghilani, C. D. (2010). Adjustment Computations.
           <a href="#fnref:4" title="return to content"> &#8617;</a>
+        </li>
+        <li class="footnote" id="fn:5">
+          <a href="http://aso.jpl.nasa.gov/">http://aso.jpl.nasa.gov/</a>
+          <a href="#fnref:5" title="return to content"> &#8617;</a>
         </li>
       </ol>
       </div>
