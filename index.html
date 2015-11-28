@@ -31,14 +31,9 @@ body { position: relative; margin-bottom: 60px; }
       <div class="row">
         <div class="col-xs-10 col-xs-offset-1">
           <p class="lead">
-            Using LiDAR sensors, we collect high resolution spatial data over large regions.
-            We collected a pair of LiDAR surveys, one when the area was snow-free and the other when it was snow-covered, and calculated snow depths.
-            We then coupled these snow depths with snow density measurements to produce snow water equivalent (SWE) measurements.
-          </p>
-
-          <p class="lead">
-            Each measurement used to calculate the final SWE values contains error.
-            We propagate these measurement errors through georegistration and post-processing, and provide SWE values with uncertainty estimates.
+            We collected a pair of LiDAR surveys over a mountain range, one when the area was snow-free and the other when it was snow-covered
+            We then calculated snow depths from these scans, and coupled these snow depths with snow density measurements to produce snow water equivalent (SWE) measurements.
+            We propagated the error in each LiDAR point through to the final SWE data products.
           </p>
         </div>
       </div>
@@ -178,6 +173,28 @@ body { position: relative; margin-bottom: 60px; }
 
             where $\mathbf{A}$ is the <em>Jacobian</em> matrix of the partial derivatives of the Taylor series expansion of Equation 3, truncated at the first term, and $\mathbf{C}_l$ is the covariance matrix of variances and covariances for each observed quanity.
               
+          </p>
+        </div>
+      </div>
+
+      <h2>Error sources</h2>
+
+      <div class="row">
+        <div class="col-xs-12 col-md-6">
+          <p>
+            There are fourteen measurements that go into Equation 2:
+          </p>
+
+          <ul>
+            <li>The range and angle measured by the LiDAR system</li>
+            <li>The x, y, and z displacement between the origin of the laser system and the origin of the GNSS system (lever arm)</li>
+            <li>The roll, pitch, and yaw rotational offsets between the scanner's coordiante system and the IMU's coordinate system (boresight)</li>
+            <li>The roll, pitch, and yaw measured by the IMU</li>
+            <li>The x, y, and z positions, as measured by the GNSS</li>
+          </ul>
+
+          <p>
+            Each measurement has an associated uncertainty.
           </p>
         </div>
       </div>
