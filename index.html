@@ -38,6 +38,107 @@ body { position: relative; margin-bottom: 60px; }
         </div>
       </div>
 
+      <h1 id="why">Why?</h1>
+
+      <div class="row">
+        <div class="col-md-6 col-xs-12">
+          <p>
+            Snow-water equivalent (SWE) is a measure of the water content in a snowpack.
+            SWE measurements over large mountain basins are used by water managers to predict the volume and rate of water production during a melt season.
+            SWE measurements also give us a picture of the amount of water stored in the mountains, which helps quantify water shortages or surpluses.
+          </p>
+        </div>
+        <div class="col-md-6 col-xs-12">
+          <p>
+            It is crucial to provide uncertainty estimates with any measurement, including LiDAR-derived data products.
+            However, per-point uncertainties are difficult to calculate and are not commonly used by LiDAR practitioners.
+            If uncertainties are provided, they are usually estimated at a dataset-wide level based upon the quality of the geopositioning and the LiDAR manufacturer's quoted specifications.
+          </p>
+          <p>
+            We hope to provide per-point uncertainties derived from the fundamental parameters of the LiDAR georeferencing equation.
+          </p>
+        </div>
+        <div class="col-md-6 col-md-offset-3 col-xs-12">
+          <div class="thumbnail">
+            <img src="images/swe.jpg" alt="federal">
+            <div class="caption">
+              <h4>Measuring SWE manually</h4>
+
+              <p>
+                Using a federal sampler to measure SWE in the Red Mountain Pass in Colorado.
+                Over the course of eight hours of collection, we collected about twenty points over an about five km square area.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+        
+      <h1 id="snow-depths-and-densities">Snow depths and densities</h1>
+
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3 col-xs-12">
+          <div class="thumbnail">
+            <img src="images/snow-depth.svg" alt="snow depth">
+            <div class="caption">
+              <h4>Calculating snow depth from two LiDAR scans</h4>
+
+              <p>
+                Subtract the height of the snow-on scan from the point height of the snow-free scan.
+                Because points are unordered, a snow-on point will probably not have a snow-free point directly beneath it; use an interpolation method to calculate a snow-free height for each snow-on point.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12">
+          <div class="thumbnail">
+            <img src="images/snotel.png" alt="snotel">
+            <div class="caption">
+              <h4>SNOTEL sites in Colorado</h4>
+
+              <p>
+              SNOTEL sites transmit weather and snowpack data, including SWE and snow depth.
+              SNOTEL locations from <a href="http://www.wcc.nrcs.usda.gov/snow/">NRCS</a>.
+              Base data from <a href="http://www.blm.gov/co/st/en/BLM_Programs/geographical_sciences/gis/GeospatialData.html">the BLM</a>.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12">
+          <div class="thumbnail">
+            <img src="images/beartown.png" alt="snow density">
+            <div class="caption">
+              <h4>Snow density at one Snotel station</h4>
+
+              <p>
+                The Beartown SNOTEL station is near our area of interest.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <p>
+          The Natural Resources Convservation Service maintains a network of remote snow monitoring stations called SNOTEL sites.<sup id="fnref:5"><a href="#fn:5">5</a></sup>
+          Included in the SNOTEL data products are snow depth and SWE (snow-water equivilant, i.e. the height of water that would be left if you melted a given depth of snow) calculations.
+          These two values can be used to extract a snow density measurement:
+
+          $$
+            SWE = depth \times density
+          $$
+
+          where $density$ is measured as a percentage of water density.
+          </p>
+
+          <p>
+            As you can see from the above figure, these density measurements are not great — snow density as a percentage of water should never go above one.
+            However, measuring snow density with remote sensing, particularily that of wet snow, is a hard problem, and so SNOTEL sites can be the best data available.
+          </p>
+        </div>
+      </div>
+
+
       <h1 id="lidar">LiDAR</h1>
 
       <div class="row">
@@ -236,61 +337,10 @@ body { position: relative; margin-bottom: 60px; }
         </div>
       </div>
 
-      <h1 id="snow-depths-and-densities">Snow depths and densities</h1>
-
-      <div class="row">
-        <div class="col-md-4 col-xs-12">
-          <div class="thumbnail">
-            <img src="images/snow-depth.svg" alt="snow depth">
-            <div class="caption">
-              <h4>Calculating snow depth from two LiDAR scans</h4>
-
-              <p>
-                Subtract the height of the snow-on scan from the point height of the snow-free scan.
-                Because points are unordered, a snow-on point will probably not have a snow-free point directly beneath it; use an interpolation method to calculate a snow-free height for each snow-on point.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-8 col-xs-12">
-          <div class="thumbnail">
-            <img src="images/beartown.png" alt="snow density">
-            <div class="caption">
-              <h4>Snow density at one Snotel station</h4>
-
-              <p>
-                The Beartown SNOTEL station is near our area of interest.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-xs-12">
-          <p>
-          The Natural Resources Convservation Service maintains a network of remote snow monitoring stations called SNOTEL sites.<sup id="fnref:5"><a href="#fn:5">5</a></sup>
-          Included in the SNOTEL data products are snow depth and SWE (snow-water equivilant, i.e. the height of water that would be left if you melted a given depth of snow) calculations.
-          These two values can be used to extract a snow density measurement:
-
-          $$
-            density = \frac {SWE} {depth}
-          $$
-
-          where $density$ is measured as a percentage of water density.
-          </p>
-
-          <p>
-            As you can see from the above figure, these density measurements are not great — snow density as a percentage of water should never go above one.
-            However, measuring snow density with remote sensing, particularily that of wet snow, is a hard problem, and so SNOTEL sites can be the best data available.
-          </p>
-        </div>
-      </div>
-
       <h1 id="work">Work completed and future work</h1>
 
       <div class="row">
-        <div class="col-xs-12 col-md-8 col-md-offset-2">
+        <div class="col-xs-12">
           <p>
           Unfortunately, I was not able to complete my objective of propogating errors through to final snow depth and snow water equivilient data products.
           I am using data from the Airborne Snow Observatory collected in the 2013 and 2014 snow years, and those data that were provided to me did not include an vital intermediate data product (*.sdc files, which are the discretized and georeferenced point cloud data).
@@ -358,8 +408,9 @@ body { position: relative; margin-bottom: 60px; }
       <div class="container-fluid">
         <ul class="nav navbar-nav">
           <li><a href="#top">Introduction</a></li>
-          <li><a href="#lidar">LiDAR</a></li>
+          <li><a href="#why">Why?</a></li>
           <li><a href="#snow-depths-and-densities">Snow depths and densities</a></li>
+          <li><a href="#lidar">LiDAR</a></li>
           <li><a href="#work">Work completed and future work</a></li>
         </ul>
       </div>
