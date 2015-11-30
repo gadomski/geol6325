@@ -220,68 +220,6 @@ body { position: relative; margin-bottom: 60px; }
         </div>
       </div>
 
-      <h2>Full-waveform LiDAR</h2>
-
-      <div class="row">
-        <div class="col-xs-12">
-          <p>
-            The idea that LiDAR scanners measure points in space is a bit of a simplification.
-            To see why, you need to know a bit about how the energy returned to a LiDAR scanner is actually measured.
-          </p>
-
-          <p>
-            When laser energy bounces off of a target and returns to the scanner, it passes back through some optics until it hits one or more more detectors.<sup id="fnref:3"><a href="#fn:3">3</a></sup>
-            These detectors are very similar to those that exist in your digital camera — they record the intensity of the incident energy on the detector.
-            The detectors in a LiDAR system are hooked up to some very precise timing machinery that records the time of the data sample with about a nanosecond resolution.
-            This produces a timeseries of samples of the incident energy on the scanner's detector.
-          </p>
-
-          <p>
-            Some examples of real-world waveform data are shown below.
-          </p>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-6 col-xs-12">
-          <div class="thumbnail">
-            <img src="images/reference-pulse.png" alt="reference pulse">
-            <div class="caption">
-              <h3>Reference pulse</h3>
-              <p>The energy of the laser pulse as it leaves the scanner.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-xs-12">
-          <div class="thumbnail">
-            <img src="images/return-pulse.png" alt="reference pulse">
-            <div class="caption">
-              <h3>Return pulse</h3>
-              <p>
-                The energy of the laser pulse as it returns to the scanner.
-                The scanner that collected these data has two channels, high and low, one which is more sensitive than the other.
-                Notice the multiple peaks in the low channel, indicating that this laser pulse interacted with multiple targets.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-xs-12">
-          <p>
-          Turning these full waveform data samples into points is a bit of a tricky problem.
-          You can use the local maximums of the return data, but that can have trouble in cluttered or otherwise non-ideal environments.
-          Many people use a Gaussian decomposition to turn the returned waveform into the summation of several Gaussian pulses, but that is imperfect if the outgoing laser energy isn't Gaussian (which it usually isn't).
-          </p>
-
-          <p>
-            For this work, we use a simple peak detection method to convert our full waveform data to discrete points.
-            We would have loved to implement a full Gaussian decomposition, but we ran out of time.
-          </p>
-        </div>
-      </div>
-
       <h2>Error propagation</h2>
 
       <div class="row">
@@ -365,6 +303,68 @@ body { position: relative; margin-bottom: 60px; }
           <p>
           For this work, we do not take into account the uncertainty due to the interaction of the laser energy with the terrain.
           For more discussion on that topic, see Hartzell.<sup id="fnref:9"><a href="#fn:9">4</a></sup>
+          </p>
+        </div>
+      </div>
+
+      <h2>Full-waveform LiDAR</h2>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <p>
+            The idea that LiDAR scanners measure points in space is a bit of a simplification.
+            To see why, you need to know a bit about how the energy returned to a LiDAR scanner is actually measured.
+          </p>
+
+          <p>
+            When laser energy bounces off of a target and returns to the scanner, it passes back through some optics until it hits one or more more detectors.<sup id="fnref:3"><a href="#fn:3">3</a></sup>
+            These detectors are very similar to those that exist in your digital camera — they record the intensity of the incident energy on the detector.
+            The detectors in a LiDAR system are hooked up to some very precise timing machinery that records the time of the data sample with about a nanosecond resolution.
+            This produces a timeseries of samples of the incident energy on the scanner's detector.
+          </p>
+
+          <p>
+            Some examples of real-world waveform data are shown below.
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 col-xs-12">
+          <div class="thumbnail">
+            <img src="images/reference-pulse.png" alt="reference pulse">
+            <div class="caption">
+              <h3>Reference pulse</h3>
+              <p>The energy of the laser pulse as it leaves the scanner.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-xs-12">
+          <div class="thumbnail">
+            <img src="images/return-pulse.png" alt="reference pulse">
+            <div class="caption">
+              <h3>Return pulse</h3>
+              <p>
+                The energy of the laser pulse as it returns to the scanner.
+                The scanner that collected these data has two channels, high and low, one which is more sensitive than the other.
+                Notice the multiple peaks in the low channel, indicating that this laser pulse interacted with multiple targets.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <p>
+          Turning these full waveform data samples into points is a bit of a tricky problem.
+          You can use the local maximums of the return data, but that can have trouble in cluttered or otherwise non-ideal environments.
+          Many people use a Gaussian decomposition to turn the returned waveform into the summation of several Gaussian pulses, but that is imperfect if the outgoing laser energy isn't Gaussian (which it usually isn't).
+          </p>
+
+          <p>
+            For this work, we use a simple peak detection method to convert our full waveform data to discrete points.
+            We would have loved to implement a full Gaussian decomposition, but we ran out of time.
           </p>
         </div>
       </div>
