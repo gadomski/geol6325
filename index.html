@@ -62,9 +62,9 @@ body { position: relative; margin-bottom: 60px; }
             These range measurements must be combined with position and attitude information to get an x-y-z point in a global reference frame, in a process called <strong>georegistration</strong> or <strong>georeferencing</strong>.
             The LiDAR georeferencing equation is well-established<sup id="fnref:1"><a href="#fn:1">1</a></sup>:
 
-            $$ \mathbf{X} = \mathbf{X}^g + \mathbf{R}^l \left( \mathbf{R}^l \mathbf{X}^s + \mathbf{X}^l \right) $$
+            $$ \mathbf{X} = \mathbf{X}^g + \mathbf{R}^g \left( \mathbf{R}^l \mathbf{X}^s + \mathbf{X}^l \right) $$
 
-            where $\mathbf{X}$ is the final laser point in the global reference frame, $\mathbf{X}^g$ is the position of the GNSS receiver in the global reference frame, $\mathbf{R}^l$ is the rotation matrix for the Interital Motion Unit (IMU) that rotates the point from local level to the global reference frame, $\mathbf{R}^l$ is the rotation matrix of the rotation displacement between the IMU and the LiDAR scanner that rotates the point from the scanner's own coordinate system to local level, $\mathbf{X}^s$ is the scanned point in the Scanner's Own Coordinate System (SOCS), and $\mathbf{X}^l$ is the positional displacement between the GNSS receiver and the LiDAR scanner's origin in the local level reference frame.
+            where $\mathbf{X}$ is the final laser point in the global reference frame, $\mathbf{X}^g$ is the position of the GNSS receiver in the global reference frame, $\mathbf{R}^g$ is the rotation matrix for the Interital Motion Unit (IMU) that rotates the point from local level to the global reference frame, $\mathbf{R}^l$ is the rotation matrix of the rotation displacement between the IMU and the LiDAR scanner that rotates the point from the scanner's own coordinate system to local level, $\mathbf{X}^s$ is the scanned point in the Scanner's Own Coordinate System (SOCS), and $\mathbf{X}^l$ is the positional displacement between the GNSS receiver and the LiDAR scanner's origin in the local level reference frame.
             Creating a georeferenced point cloud from mobile LiDAR data is then a matter of mounting a GNSS/IMU unit rigidly to the same body as the scanner and applying the georeferencing equation to each LiDAR point.<sup id="fnref:2"><a href="#fn:2">2</a></sup>
           </p>
         </div>
@@ -180,21 +180,35 @@ body { position: relative; margin-bottom: 60px; }
       <h2>Error sources</h2>
 
       <div class="row">
-        <div class="col-xs-12 col-md-6">
+        <div class="col-xs-12 col-md-4">
           <p>
-            There are fourteen measurements that go into Equation 2:
+          There are fourteen measurements that go into the measurement of a point $\mathbf{X}$:
           </p>
 
           <ul>
-            <li>The range and angle measured by the LiDAR system</li>
-            <li>The x, y, and z displacement between the origin of the laser system and the origin of the GNSS system (lever arm)</li>
-            <li>The roll, pitch, and yaw rotational offsets between the scanner's coordiante system and the IMU's coordinate system (boresight)</li>
-            <li>The roll, pitch, and yaw measured by the IMU</li>
-            <li>The x, y, and z positions, as measured by the GNSS</li>
+            <li>The range $r$ and angle $\theta$ measured by the LiDAR system</li>
+            <li>The x, y, and z displacement $\mathbf{X}^l$ between the origin of the laser system and the origin of the GNSS system (lever arm)</li>
+            <li>The roll $d\omega$, pitch $d\phi$, and yaw $d\kappa$ rotational offsets between the scanner's coordiante system and the IMU's coordinate system (boresight)</li>
+            <li>The roll $\omega$, pitch $\phi$, and yaw $\kappa$ measured by the IMU</li>
+            <li>The x, y, and z positions $\mathbf{X}^g$, as measured by the GNSS</li>
           </ul>
 
           <p>
             Each measurement has an associated uncertainty.
+          </p>
+        </div>
+
+        <div class="col-xs-12 col-md-8">
+          <p>
+            $$
+              \mathbf{X}_0 = \\
+                \left( \cos\omega \cos\kappa + \sin\phi\sin\omega\sin\kappa \right) \\
+                \left[ \left( \cos d \omega \cos d \kappa + \sin d \phi \sin d \omega \sin d \kappa \right) r \cos \theta +
+                  \left( \cos d \kappa \sin d \omega - \cos d \omega \sin d \phi \sin d \kappa \right) r \sin \theta + \mathbf{X}^l_0 \right] + \\
+                \cos\phi\sin\kappa \\
+                \left[\left(\cos d\kappa \sin d\phi \sin d\omega - \cos d\omega \sin d\kappa \right) r\cos\theta + 
+                  \left(-\sin d\omega \sin d\kappa - \cos d\omega \cos d\kappa \sin d\phi \right) r\sin \theta + \mathbf{X}^l_1 \right]
+            $$
           </p>
         </div>
       </div>
