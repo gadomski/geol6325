@@ -32,8 +32,8 @@ body { position: relative; margin-bottom: 60px; }
         <div class="col-xs-10 col-xs-offset-1">
           <p class="lead">
             We collected a pair of LiDAR surveys over a mountain range, one when the area was snow-free and the other when it was snow-covered
-            We then calculated snow depths from these scans, and coupled these snow depths with snow density measurements to produce snow water equivalent (SWE) measurements.
-            We propagated the error in each LiDAR point through to the final SWE data products.
+            We performed full-waveform decomposition on these files, and attempted (and failed) to georegister them.
+            We demonstrate the procedure for calculating snow depths and SWE measurements with propagated errors.
           </p>
         </div>
       </div>
@@ -62,9 +62,9 @@ body { position: relative; margin-bottom: 60px; }
             These range measurements must be combined with position and attitude information to get an x-y-z point in a global reference frame, in a process called <strong>georegistration</strong> or <strong>georeferencing</strong>.
             The LiDAR georeferencing equation is well-established<sup id="fnref:1"><a href="#fn:1">1</a></sup>:
 
-            $$ \mathbf{X}_{g} = \mathbf{X}_{gnss} + \mathbf{R}_{imu} \left( \mathbf{R}_{boresight} \mathbf{X}_{scanner} + \mathbf{X}_{lever arm} \right) $$
+            $$ \mathbf{X} = \mathbf{X}^g + \mathbf{R}^l \left( \mathbf{R}^l \mathbf{X}^s + \mathbf{X}^l \right) $$
 
-            where $\mathbf{X}_{g}$ is the final point in a global reference frame, $\mathbf{X}_{gnss}$ is the position of the GNSS receiver in the global reference frame, $\mathbf{R}_{imu}$ is the rotation matrix for the Interital Motion Unit (IMU), $\mathbf{R}_{boresight}$ is the rotation matrix of the rotation displacement between the IMU and the LiDAR scanner, $\mathbf{X}_{scanner}$ is the scanned point in the Scanner's Own Coordinate System (SOCS), and $\mathbf{X}_{lever arm}$ is the positional displacement between the GNSS receiver and the LiDAR scanner's origin.
+            where $\mathbf{X}$ is the final laser point in the global reference frame, $\mathbf{X}^g$ is the position of the GNSS receiver in the global reference frame, $\mathbf{R}^l$ is the rotation matrix for the Interital Motion Unit (IMU) that rotates the point from local level to the global reference frame, $\mathbf{R}^l$ is the rotation matrix of the rotation displacement between the IMU and the LiDAR scanner that rotates the point from the scanner's own coordinate system to local level, $\mathbf{X}^s$ is the scanned point in the Scanner's Own Coordinate System (SOCS), and $\mathbf{X}^l$ is the positional displacement between the GNSS receiver and the LiDAR scanner's origin in the local level reference frame.
             Creating a georeferenced point cloud from mobile LiDAR data is then a matter of mounting a GNSS/IMU unit rigidly to the same body as the scanner and applying the georeferencing equation to each LiDAR point.<sup id="fnref:2"><a href="#fn:2">2</a></sup>
           </p>
         </div>
