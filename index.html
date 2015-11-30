@@ -24,15 +24,15 @@ body { position: relative; margin-bottom: 60px; }
   <body data-spy="scroll" data-target="#navbar-bottom">
     <div class="container">
       <div class="jumbotron" id="top">
-        <h3>Calculating LiDAR point cloud uncertainty and propagating uncertainty to snow-water equivalent data products</h3>
+        <h3>Calculating LiDAR point cloud uncertainty and propagating uncertainty to snow-water equivalent data products (incomplete)</h3>
         <p>GEOL 6325 final project<br>Peter J. Gadomski</p>
       </div>
 
       <div class="row">
         <div class="col-xs-10 col-xs-offset-1">
           <p class="lead">
-            We collected a pair of LiDAR surveys over a mountain range, one when the area was snow-free and the other when it was snow-covered
-            We performed full-waveform decomposition on these files, and attempted (and failed) to georegister them.
+            We implemented a new full-waveform discretization software package for Riegl's .sdf format.
+            We attempted and failed to georeference full-waveform airborne LiDAR data.
             We demonstrate the procedure for calculating snow depths and SWE measurements with propagated errors.
           </p>
         </div>
@@ -219,6 +219,23 @@ body { position: relative; margin-bottom: 60px; }
         </div>
       </div>
 
+      <div class="row">
+        <div class="col-xs-12">
+          <p>
+            Some of the errors, such as those in the position and attidue of the IMU/GNSS system, are products of the IMU/GNSS processing and are available as timestamped records.
+            Other errors must be estimated or measured.
+            Per Glennie, the lever-arm errors are commonly assumed to be about 2cm each, and the boresight errors can be assumed to be 0.001° in roll and pitch and 0.004° in yaw.
+            Errors in the range of scanner measurements are generally a function of the timing circuitry in the scanner are are usually on the order of 1cm to 2cm.
+            Angular errors in the scanner measurements are complicated due to the divergence of the laser beam — Glennie discussuses reasonable simplifications to get a single angular value.
+          </p>
+
+          <p>
+          For this work, we do not take into acount the uncertainty due to the interaction of the laser energy with the terrain.
+          For more discussion on that topic, see Hartzell.<sup id="fnref:9"><a href="#fn:9">4</a></sup>
+          </p>
+        </div>
+      </div>
+
       <h1 id="snow-depths-and-densities">Snow depths and densities</h1>
 
       <div class="row">
@@ -328,6 +345,10 @@ body { position: relative; margin-bottom: 60px; }
         <li class="footnote" id="fn:8">
           <a href="https://github.com/gadomski/georef">https://github.com/gadomski/georef</a>
           <a href="#fnref:8" title="return to content"> &#8617;</a>
+        </li>
+        <li class="footnote" id="fn:9">
+          Hartzell, P. J., Gadomski, P. J., Glennie, C. L., Finnegan, C., & Deems, J. S. (2015). Rigorous Error Propagation for Terrestrial Laser Scanning with Application to Snow Volume Uncertainty.
+          <a href="#fnref:9" title="return to content"> &#8617;</a>
         </li>
       </ol>
       </div>
