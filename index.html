@@ -126,8 +126,8 @@ body { position: relative; margin-bottom: 60px; }
         <div class="row">
           <div class="col-xs-12">
             <p>
-            The Natural Resources Convservation Service maintains a network of remote snow monitoring stations called SNOTEL sites.<sup id="fnref:5"><a href="#fn:5">5</a></sup>
-            Included in the SNOTEL data products are snow depth and SWE (snow-water equivilant, i.e. the height of water that would be left if you melted a given depth of snow) calculations.
+            The Natural Resources Conservation Service maintains a network of remote snow monitoring stations called SNOTEL sites.<sup id="fnref:5"><a href="#fn:5">5</a></sup>
+            Included in the SNOTEL data products are snow depth and SWE (snow-water equivalent, i.e. the height of water that would be left if you melted a given depth of snow) calculations.
             These two values can be used to extract a snow density measurement:
 
             $$
@@ -139,7 +139,7 @@ body { position: relative; margin-bottom: 60px; }
 
             <p>
             As you can see from the below figure, these density measurements are not great — snow density as a percentage of water should never go above one.
-            However, measuring snow density with remote sensing, particularily that of wet snow, is a hard problem, and so SNOTEL sites can be the best data available.
+            However, measuring snow density with remote sensing, particularity that of wet snow, is a hard problem, and so SNOTEL sites can be the best data available.
             </p>
           </div>
         </div>
@@ -163,7 +163,7 @@ body { position: relative; margin-bottom: 60px; }
           <div class="thumbnail">
             <img src="images/beartown.png" alt="snow density">
             <div class="caption">
-              <h4>Snow density at one Snotel station</h4>
+              <h4>Snow density at one SNOTEL station</h4>
 
               <p>
                 The Beartown SNOTEL station is near our area of interest.
@@ -179,7 +179,7 @@ body { position: relative; margin-bottom: 60px; }
       <div class="row">
         <div class="col-md-8 col-xs-12">
           <p>
-            LiDAR sensors use laser energy to measure the distance between a sensor and a reflective target; the most common type uses the two-way travel time of a pulse of laser energy to cacluate a range.
+            LiDAR sensors use laser energy to measure the distance between a sensor and a reflective target; the most common type uses the two-way travel time of a pulse of laser energy to calculate a range.
 
             $$ range = c \frac {t} {2} $$
 
@@ -308,7 +308,7 @@ body { position: relative; margin-bottom: 60px; }
               = \mathbf{A} \mathbf{C}_l \mathbf{A}^T
             $$
 
-            where $\mathbf{A}$ is the <em>Jacobian</em> matrix of the partial derivatives of the Taylor series expansion of Equation 3, truncated at the first term, and $\mathbf{C}_l$ is the covariance matrix of variances and covariances for each observed quanity.
+            where $\mathbf{A}$ is the <em>Jacobian</em> matrix of the partial derivatives of the Taylor series expansion of Equation 3, truncated at the first term, and $\mathbf{C}_l$ is the covariance matrix of variances and covariances for each observed quantity.
               
           </p>
         </div>
@@ -325,7 +325,7 @@ body { position: relative; margin-bottom: 60px; }
           <ul>
             <li>The range $r$ and angle $\theta$ measured by the LiDAR system</li>
             <li>The x, y, and z displacement $\mathbf{X}^l$ between the origin of the laser system and the origin of the GNSS system (lever arm)</li>
-            <li>The roll $d\omega$, pitch $d\phi$, and yaw $d\kappa$ rotational offsets between the scanner's coordiante system and the IMU's coordinate system (boresight)</li>
+            <li>The roll $d\omega$, pitch $d\phi$, and yaw $d\kappa$ rotational offsets between the scanner's coordinate system and the IMU's coordinate system (boresight)</li>
             <li>The roll $\omega$, pitch $\phi$, and yaw $\kappa$ measured by the IMU</li>
             <li>The x, y, and z positions $\mathbf{X}^g$, as measured by the GNSS</li>
           </ul>
@@ -355,15 +355,15 @@ body { position: relative; margin-bottom: 60px; }
       <div class="row">
         <div class="col-xs-12">
           <p>
-            Some of the errors, such as those in the position and attidue of the IMU/GNSS system, are products of the IMU/GNSS processing and are available as timestamped records.
+            Some of the errors, such as those in the position and attitude of the IMU/GNSS system, are products of the IMU/GNSS processing and are available as timestamped records.
             Other errors must be estimated or measured.
             Per Glennie, the lever-arm errors are commonly assumed to be about 2cm each, and the boresight errors can be assumed to be 0.001° in roll and pitch and 0.004° in yaw.
             Errors in the range of scanner measurements are generally a function of the timing circuitry in the scanner are are usually on the order of 1cm to 2cm.
-            Angular errors in the scanner measurements are complicated due to the divergence of the laser beam — Glennie discussuses reasonable simplifications to get a single angular value.
+            Angular errors in the scanner measurements are complicated due to the divergence of the laser beam — Glennie discusses reasonable simplifications to get a single angular value.
           </p>
 
           <p>
-          For this work, we do not take into acount the uncertainty due to the interaction of the laser energy with the terrain.
+          For this work, we do not take into account the uncertainty due to the interaction of the laser energy with the terrain.
           For more discussion on that topic, see Hartzell.<sup id="fnref:9"><a href="#fn:9">4</a></sup>
           </p>
         </div>
@@ -374,7 +374,7 @@ body { position: relative; margin-bottom: 60px; }
       <div class="row">
         <div class="col-xs-12">
           <p>
-          Unfortunately, I was not able to complete my objective of propogating errors through to final snow depth and snow water equivilient data products.
+          Unfortunately, I was not able to complete my objective of propagating errors through to final snow depth and snow water equivalent data products.
           I am using data from the Airborne Snow Observatory collected in the 2013 and 2014 snow years, and those data that were provided to me did not include an vital intermediate data product (*.sdc files, which are the discretized and georeferenced point cloud data).
           These data were also incomplete enough that I was unable to process them using Riegl's proprietary software.
           Therefore, while I waited on a as-of-yet unfulfilled request for additional data from ASO, I (perhaps unwisely) undertook to implement my own full-waveform peak detection and georeferencing software.
@@ -403,6 +403,14 @@ body { position: relative; margin-bottom: 60px; }
           </p>
         </div>
       </div>
+
+      <h1>Acknowledgements</h1>
+
+      <p>
+      Many thanks to Dr. Jeffery Deems for providing the ASO data, and to the entire ASO team.
+      Thanks as well to Dr. Craig Glennie and Preston Hartzell for advising on the georeferencing and error propagation.
+      </p>
+
 
       <div class="footnotes">
         <ol>
