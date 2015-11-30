@@ -23,7 +23,7 @@ body { position: relative; margin-bottom: 60px; }
   </head>
   <body data-spy="scroll" data-target="#navbar-bottom">
     <div class="container">
-      <div class="jumbotron">
+      <div class="jumbotron" id="top">
         <h3>Calculating LiDAR point cloud uncertainty and propagating uncertainty to snow-water equivalent data products</h3>
         <p>GEOL 6325 final project<br>Peter J. Gadomski</p>
       </div>
@@ -38,7 +38,7 @@ body { position: relative; margin-bottom: 60px; }
         </div>
       </div>
 
-      <h1>LiDAR</h1>
+      <h1 id="lidar">LiDAR</h1>
 
       <div class="row">
         <div class="col-md-8 col-xs-12">
@@ -219,7 +219,7 @@ body { position: relative; margin-bottom: 60px; }
         </div>
       </div>
 
-      <h1>Snow depths and densities</h1>
+      <h1 id="snow-depths-and-densities">Snow depths and densities</h1>
 
       <div class="row">
         <div class="col-md-4 col-xs-12">
@@ -236,9 +236,60 @@ body { position: relative; margin-bottom: 60px; }
           </div>
         </div>
         <div class="col-md-8 col-xs-12">
+          <div class="thumbnail">
+            <img src="images/beartown.png" alt="snow density">
+            <div class="caption">
+              <h4>Snow density at one Snotel station</h4>
+
+              <p>
+                The Beartown SNOTEL station is near our area of interest.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
           <p>
-            We can calculate a snow depth by comparing two georeferenced LiDAR scans &mdash; one scan with snow and the other without.
-            We used data from the Airborne Snow Observatory (ASO)<sup id="fnref:5"><a href="#fn:5">5</a></sup>
+          The Natural Resources Convservation Service maintains a network of remote snow monitoring stations called SNOTEL sites.<sup id="fnref:5"><a href="#fn:5">5</a></sup>
+          Included in the SNOTEL data products are snow depth and SWE (snow-water equivilant, i.e. the height of water that would be left if you melted a given depth of snow) calculations.
+          These two values can be used to extract a snow density measurement:
+
+          $$
+            density = \frac {SWE} {depth}
+          $$
+
+          where $density$ is measured as a percentage of water density.
+          </p>
+
+          <p>
+            As you can see from the above figure, these density measurements are not great — snow density as a percentage of water should never go above one.
+            However, measuring snow density with remote sensing, particularily that of wet snow, is a hard problem, and so SNOTEL sites can be the best data available.
+          </p>
+        </div>
+      </div>
+
+      <h1 id="work">Work completed and future work</h1>
+
+      <div class="row">
+        <div class="col-xs-12 col-md-8 col-md-offset-2">
+          <p>
+          Unfortunately, I was not able to complete my objective of propogating errors through to final snow depth and snow water equivilient data products.
+          I am using data from the Airborne Snow Observatory collected in the 2013 and 2014 snow years, and those data that were provided to me did not include an vital intermediate data product (*.sdc files, which are the discretized and georeferenced point cloud data).
+          These data were also incomplete enough that I was unable to process them using Riegl's proprietary software.
+          Therefore, while I waited on a as-of-yet unfulfilled request for additional data from ASO, I (perhaps unwisely) undertook to implement my own full-waveform peak detection and georeferencing software.
+          </p>
+
+          <p>
+            I was able to make good headway on the problem.
+            I implemented custom peak detection<sup id="fnref:6"><a href="#fn:6">7</a></sup> for sdf files<sup id="fnref:7"><a href="#fn:7">7</a></sup>, one of Riegl's full-waveform data formats.
+            I implemented georeferencing<sup id="fnref:8"><a href="#fn:8">8</a></sup> and demonstrated its correctness using another airborne discrete-point dataset.
+            However, the integration of my full-waveform ASO data and my georeferencing package is, as of this writing, not working.
+          </p>
+
+          <p>
+            Future work includes, of course, to either correctly georeference the full-waveform ASO data, or to get processed discrete-return data from ASO, which can then be used to complete the project objectives.
           </p>
         </div>
       </div>
@@ -263,8 +314,20 @@ body { position: relative; margin-bottom: 60px; }
           <a href="#fnref:4" title="return to content"> &#8617;</a>
         </li>
         <li class="footnote" id="fn:5">
-          <a href="http://aso.jpl.nasa.gov/">http://aso.jpl.nasa.gov/</a>
+          <a href="http://www.wcc.nrcs.usda.gov/snow/">http://www.wcc.nrcs.usda.gov/snow/</a>
           <a href="#fnref:5" title="return to content"> &#8617;</a>
+        </li>
+        <li class="footnote" id="fn:6">
+          <a href="https://github.com/gadomski/peakbag">https://github.com/gadomski/peakbag</a>
+          <a href="#fnref:6" title="return to content"> &#8617;</a>
+        </li>
+        <li class="footnote" id="fn:7">
+          <a href="https://github.com/gadomski/sdf-rs">https://github.com/gadomski/sdf-rs</a>
+          <a href="#fnref:7" title="return to content"> &#8617;</a>
+        </li>
+        <li class="footnote" id="fn:8">
+          <a href="https://github.com/gadomski/georef">https://github.com/gadomski/georef</a>
+          <a href="#fnref:8" title="return to content"> &#8617;</a>
         </li>
       </ol>
       </div>
@@ -273,9 +336,10 @@ body { position: relative; margin-bottom: 60px; }
     <nav class="navbar navbar-default navbar-fixed-bottom" id="navbar-bottom">
       <div class="container-fluid">
         <ul class="nav navbar-nav">
-          <li><a href="#pulse-based-lidar">Pulse-based LiDAR</a></li>
-          <li><a href="#georeferencing">Georeferencing</a></li>
-          <li><a href="#point-uncertainty">Point uncertainty</a></li>
+          <li><a href="#top">Introduction</a></li>
+          <li><a href="#lidar">LiDAR</a></li>
+          <li><a href="#snow-depths-and-densities">Snow depths and densities</a></li>
+          <li><a href="#work">Work completed and future work</a></li>
         </ul>
       </div>
     </nav>
