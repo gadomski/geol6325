@@ -76,19 +76,75 @@ body { position: relative; margin-bottom: 60px; }
       <h1 id="snow-depths-and-densities">Snow depths and densities</h1>
 
       <div class="row">
-        <div class="col-md-6 col-md-offset-3 col-xs-12">
+        <div class="col-xs-12">
+          <p>
+          We can calculate snow depths by comparing snow-free and snow-on scans.
+          Our data is provided by the <a href="http://aso.jpl.nasa.gov/">Airborne Snow Observatory</a>.
+          </p>
+        </div>
+        <div class="col-md-4 col-md-offset-4 col-xs-12">
           <div class="thumbnail">
             <img src="images/snow-depth.svg" alt="snow depth">
             <div class="caption">
               <h4>Calculating snow depth from two LiDAR scans</h4>
 
               <p>
-                Subtract the height of the snow-on scan from the point height of the snow-free scan.
-                Because points are unordered, a snow-on point will probably not have a snow-free point directly beneath it; use an interpolation method to calculate a snow-free height for each snow-on point.
+              Subtract the height of the snow-on scan from the point height of the snow-free scan.
+              Because points are unordered, a snow-on point will probably not have a snow-free point directly beneath it; use an interpolation method to calculate a snow-free height for each snow-on point.
               </p>
             </div>
           </div>
         </div>
+        <div class="col-md-6 col-xs-12">
+          <div class="thumbnail">
+            <img src="images/2014-snowoff.png" alt="snow off">
+            <div class="caption">
+              <h4>Snow-free scan</h4>
+              <p>Taken in fall 2014.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-xs-12">
+          <div class="thumbnail">
+            <img src="images/2015-snowon.png" alt="snow on">
+            <div class="caption">
+              <h4>Snow-on scan</h4>
+              <p>Taken in spring 2015.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-md-offset-3 col-xs-12">
+          <div class="thumbnail">
+            <img src="images/2015-snowdepth.png" alt="snow depths">
+            <div class="caption">
+              <h4>Snow depths</h4>
+              <p>Calculated using a simple point-to-mesh distance.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12">
+            <p>
+            The Natural Resources Convservation Service maintains a network of remote snow monitoring stations called SNOTEL sites.<sup id="fnref:5"><a href="#fn:5">5</a></sup>
+            Included in the SNOTEL data products are snow depth and SWE (snow-water equivilant, i.e. the height of water that would be left if you melted a given depth of snow) calculations.
+            These two values can be used to extract a snow density measurement:
+
+            $$
+            SWE = depth \times density
+            $$
+
+            where $density$ is measured as a percentage of water density.
+            </p>
+
+            <p>
+            As you can see from the above figure, these density measurements are not great — snow density as a percentage of water should never go above one.
+            However, measuring snow density with remote sensing, particularily that of wet snow, is a hard problem, and so SNOTEL sites can be the best data available.
+            </p>
+          </div>
+        </div>
+
+
         <div class="col-xs-12">
           <div class="thumbnail">
             <img src="images/snotel.png" alt="snotel">
@@ -114,27 +170,6 @@ body { position: relative; margin-bottom: 60px; }
               </p>
             </div>
           </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-xs-12">
-          <p>
-          The Natural Resources Convservation Service maintains a network of remote snow monitoring stations called SNOTEL sites.<sup id="fnref:5"><a href="#fn:5">5</a></sup>
-          Included in the SNOTEL data products are snow depth and SWE (snow-water equivilant, i.e. the height of water that would be left if you melted a given depth of snow) calculations.
-          These two values can be used to extract a snow density measurement:
-
-          $$
-            SWE = depth \times density
-          $$
-
-          where $density$ is measured as a percentage of water density.
-          </p>
-
-          <p>
-            As you can see from the above figure, these density measurements are not great — snow density as a percentage of water should never go above one.
-            However, measuring snow density with remote sensing, particularily that of wet snow, is a hard problem, and so SNOTEL sites can be the best data available.
-          </p>
         </div>
       </div>
 
