@@ -31,9 +31,9 @@ body { position: relative; margin-bottom: 60px; }
       <div class="row">
         <div class="col-xs-10 col-xs-offset-1">
           <p class="lead">
-            We decomposed full waveform airborne LiDAR data from the Airborne Snow Observatory and georeferenced those data.
-            We propagated component errors through to final LiDAR points.
-            We demonstrate the procedure for calculating snow depths and SWE measurements with these propagated errors.
+          We decomposed full waveform airborne LiDAR data from the Airborne Snow Observatory and georeferenced those data.
+          We propagated component errors through to final LiDAR points.
+          We demonstrate the procedure for calculating snow depths and SWE measurements with these propagated errors.
           </p>
         </div>
       </div>
@@ -43,29 +43,29 @@ body { position: relative; margin-bottom: 60px; }
       <div class="row">
         <div class="col-md-6 col-xs-12">
           <p>
-            Snow-water equivalent (SWE) is a measure of the water content in a snowpack.
-            SWE measurements over large mountain basins are used by water managers to predict the volume and rate of water production during a melt season.
-            SWE measurements also give us a picture of the amount of water stored in the mountains, which helps quantify water shortages or surpluses.
+          Snow-water equivalent (SWE) is a measure of the water content in a snowpack.
+          SWE measurements over large mountain basins are used by water managers to predict the volume and rate of water production during a melt season.
+          SWE measurements also give us a picture of the amount of water stored in the mountains, which helps quantify water shortages or surpluses.
           </p>
 
           <p>
-            To measure SWE, we need to measure the depth and density of a snowpack.
-            $$
-            SWE = depth \times density
-            $$
-            In the "old days", we measured both by hand using instruments such as a Federal sampler.
-            The snow community has developed several remote sensing techniques can help gather more data over larger areas, but more work needs to be done, particularly to measure snow densities with remote sensing.
+          To measure SWE, we need to measure the depth and density of a snowpack.
+          $$
+          SWE = depth \times density
+          $$
+          In the "old days", we measured both by hand using instruments such as a Federal sampler.
+          The snow community has developed several remote sensing techniques can help gather more data over larger areas, but more work needs to be done, particularly to measure snow densities with remote sensing.
           </p>
 
           <h3>The Airborne Snow Observatory</h3>
 
           <p>
-            The Airborne Snow Observatory, or ASO, is an airborne LiDAR sensor and hyperspectral camera that has been gathering data on snowpacks in California and Colorado since 2013.
-            Using LiDAR data, in-situ snow density measurements, and hyperspectral data, the ASO project calculates SWE and models the future melt rate of mountain snowpacks, all with a (nominally) 24-hour turnaround. 
+          The Airborne Snow Observatory, or ASO, is an airborne LiDAR sensor and hyperspectral camera that has been gathering data on snowpacks in California and Colorado since 2013.
+          Using LiDAR data, in-situ snow density measurements, and hyperspectral data, the ASO project calculates SWE and models the future melt rate of mountain snowpacks, all with a (nominally) 24-hour turnaround. 
           </p>
 
           <img src="images/aso-logo.png" class="img-responsive">
-            
+
         </div>
         <div class="col-md-5 col-md-offset-1 col-xs-12">
           <div class="thumbnail">
@@ -74,8 +74,8 @@ body { position: relative; margin-bottom: 60px; }
               <h4>Measuring SWE manually</h4>
 
               <p>
-                Using a federal sampler to measure SWE in the Red Mountain Pass in Colorado.
-                Over the course of eight hours of collection, we collected about twenty points over an about five km square area.
+              Using a federal sampler to measure SWE in the Red Mountain Pass in Colorado.
+              Over the course of eight hours of collection, we collected about twenty points over an about five km square area.
               </p>
             </div>
           </div>
@@ -85,8 +85,8 @@ body { position: relative; margin-bottom: 60px; }
               <h4>Ground truthing ASO data</h4>
 
               <p>
-                The early ASO campaigns required ground-truthing with TLS data.
-                This is a TLS collect in the Senator Beck Basin in southwestern Colorado.
+              The early ASO campaigns required ground-truthing with TLS data.
+              This is a TLS collect in the Senator Beck Basin in southwestern Colorado.
               </p>
             </div>
           </div>
@@ -108,7 +108,7 @@ body { position: relative; margin-bottom: 60px; }
       </div>
 
       <hr>
-        
+
       <h1 id="snow-depths-and-densities">Calculating snow depths and densities</h1>
 
       <p>SWE is depth times density. In order to calculate SWE, we need to measure both.</p>
@@ -161,24 +161,22 @@ body { position: relative; margin-bottom: 60px; }
             </div>
           </div>
         </div>
+      </div>
 
-        <div class="row">
-          <div class="col-xs-12">
-            <h2>Snow density <small>tough to measure</small></h2>
-            <p>
-            The Natural Resources Conservation Service maintains a network of remote snow monitoring stations called SNOTEL sites.<sup id="fnref:5"><a href="#fn:5">5</a></sup>
-            Included in the SNOTEL data products are snow depth and SWE (snow-water equivalent, i.e. the height of water that would be left if you melted a given depth of snow) calculations.
-            These two values can be used to extract a snow density measurement, as described in Equation 1.
-            </p>
+      <div class="row">
+        <div class="col-xs-12">
+          <h2>Snow density <small>tough to measure</small></h2>
+          <p>
+          The Natural Resources Conservation Service maintains a network of remote snow monitoring stations called SNOTEL sites.<sup id="fnref:5"><a href="#fn:5">5</a></sup>
+          Included in the SNOTEL data products are snow depth and SWE (snow-water equivalent, i.e. the height of water that would be left if you melted a given depth of snow) calculations.
+          These two values can be used to extract a snow density measurement, as described in Equation 1.
+          </p>
 
-            <p>
-            As you can see from the below figure, these density measurements are not great — snow density as a percentage of water should never go above one.
-            However, measuring snow density with remote sensing, particularity that of wet snow, is a hard problem, and so SNOTEL sites can be the best data available.
-            </p>
-          </div>
+          <p>
+          As you can see from the below figure, these density measurements are not great — snow density as a percentage of water should never go above one.
+          However, measuring snow density with remote sensing, particularity that of wet snow, is a hard problem, and so SNOTEL sites can be the best data available.
+          </p>
         </div>
-
-
         <div class="col-xs-12">
           <div class="thumbnail">
             <img src="images/beartown.png" alt="snow density">
@@ -186,7 +184,7 @@ body { position: relative; margin-bottom: 60px; }
               <h4>Snow density at one SNOTEL station</h4>
 
               <p>
-                The Beartown SNOTEL station is near our area of interest.
+              The Beartown SNOTEL station is near our area of interest.
               </p>
             </div>
           </div>
@@ -207,6 +205,8 @@ body { position: relative; margin-bottom: 60px; }
         </div>
       </div>
 
+
+
       <hr>
 
       <h1 id="lidar">LiDAR</h1>
@@ -214,29 +214,29 @@ body { position: relative; margin-bottom: 60px; }
       <div class="row">
         <div class="col-md-8 col-xs-12">
           <p>
-            LiDAR sensors use laser energy to measure the distance between a sensor and a reflective target; the most common type uses the two-way travel time of a pulse of laser energy to calculate a range.
+          LiDAR sensors use laser energy to measure the distance between a sensor and a reflective target; the most common type uses the two-way travel time of a pulse of laser energy to calculate a range.
 
-            $$ range = c \frac {t} {2} $$
+          $$ range = c \frac {t} {2} $$
 
-            where $c$ is the speed of light and $t$ is the two-way travel time of the laser pulse.
-            When mounted to a mobile platform such as an aircraft, a LiDAR scanner can provide a large number of range measurements that cover a large spatial area.
+          where $c$ is the speed of light and $t$ is the two-way travel time of the laser pulse.
+          When mounted to a mobile platform such as an aircraft, a LiDAR scanner can provide a large number of range measurements that cover a large spatial area.
           </p>
 
           <p>
-            A basic LiDAR system is a one-dimensional measurement tool — it measures ranges from the scanner to the target.
-            In order to measure points in two dimensions, scanners use a rotating or oscillating mirror to redirect the laser energy.
-            A full three dimensions of measurement are enabled by moving the mirror in space, as in the case in mobile and airborne scanning, or rotating it around another axis, as is the case with terrestrial scanning.
+          A basic LiDAR system is a one-dimensional measurement tool — it measures ranges from the scanner to the target.
+          In order to measure points in two dimensions, scanners use a rotating or oscillating mirror to redirect the laser energy.
+          A full three dimensions of measurement are enabled by moving the mirror in space, as in the case in mobile and airborne scanning, or rotating it around another axis, as is the case with terrestrial scanning.
           </p>
 
           <p>
-            Even though we mount a LiDAR scanner on a moving platform, the scanner itself still only measures the range to a target.
-            These range measurements must be combined with position and attitude information to get an x-y-z point in a global reference frame, in a process called <strong>georegistration</strong> or <strong>georeferencing</strong>.
-            The LiDAR georeferencing equation is well-established<sup id="fnref:1"><a href="#fn:1">1</a></sup>:
+          Even though we mount a LiDAR scanner on a moving platform, the scanner itself still only measures the range to a target.
+          These range measurements must be combined with position and attitude information to get an x-y-z point in a global reference frame, in a process called <strong>georegistration</strong> or <strong>georeferencing</strong>.
+          The LiDAR georeferencing equation is well-established<sup id="fnref:1"><a href="#fn:1">1</a></sup>:
 
-            $$ \mathbf{X} = \mathbf{X}^g + \mathbf{R}^g \left( \mathbf{R}^l \mathbf{X}^s + \mathbf{X}^l \right) $$
+          $$ \mathbf{X} = \mathbf{X}^g + \mathbf{R}^g \left( \mathbf{R}^l \mathbf{X}^s + \mathbf{X}^l \right) $$
 
-            where $\mathbf{X}$ is the final laser point in the global reference frame, $\mathbf{X}^g$ is the position of the GNSS receiver in the global reference frame, $\mathbf{R}^g$ is the rotation matrix for the Interital Motion Unit (IMU) that rotates the point from local level to the global reference frame, $\mathbf{R}^l$ is the rotation matrix of the rotation displacement between the IMU and the LiDAR scanner that rotates the point from the scanner's own coordinate system to local level, $\mathbf{X}^s$ is the scanned point in the Scanner's Own Coordinate System (SOCS), and $\mathbf{X}^l$ is the positional displacement between the GNSS receiver and the LiDAR scanner's origin in the local level reference frame.
-            Creating a georeferenced point cloud from mobile LiDAR data is then a matter of mounting a GNSS/IMU unit rigidly to the same body as the scanner and applying the georeferencing equation to each LiDAR point.<sup id="fnref:2"><a href="#fn:2">2</a></sup>
+          where $\mathbf{X}$ is the final laser point in the global reference frame, $\mathbf{X}^g$ is the position of the GNSS receiver in the global reference frame, $\mathbf{R}^g$ is the rotation matrix for the Interital Motion Unit (IMU) that rotates the point from local level to the global reference frame, $\mathbf{R}^l$ is the rotation matrix of the rotation displacement between the IMU and the LiDAR scanner that rotates the point from the scanner's own coordinate system to local level, $\mathbf{X}^s$ is the scanned point in the Scanner's Own Coordinate System (SOCS), and $\mathbf{X}^l$ is the positional displacement between the GNSS receiver and the LiDAR scanner's origin in the local level reference frame.
+          Creating a georeferenced point cloud from mobile LiDAR data is then a matter of mounting a GNSS/IMU unit rigidly to the same body as the scanner and applying the georeferencing equation to each LiDAR point.<sup id="fnref:2"><a href="#fn:2">2</a></sup>
           </p>
         </div>
 
@@ -246,8 +246,8 @@ body { position: relative; margin-bottom: 60px; }
               <h4>LiDAR internals</h4>
 
               <p>
-                The laser source transmits pulses of laser energy, which are reflected by the rotating polygonal mirror and bounce off of a target.
-                The time between pulse emission and energy detection is measured, and that time difference is used to calculate the range to target.
+              The laser source transmits pulses of laser energy, which are reflected by the rotating polygonal mirror and bounce off of a target.
+              The time between pulse emission and energy detection is measured, and that time difference is used to calculate the range to target.
               </p>
             </div>
             <img src="images/lidar-schematic.svg" alt="snow depth">
@@ -260,29 +260,29 @@ body { position: relative; margin-bottom: 60px; }
       <div class="row">
         <div class="col-xs-12">
           <p>
-            As you're seeing, there are a lot of components that go into collecting a single LiDAR measurement, and each one of these components has an associated uncertainty of measurement.
-            Turning our full waveform data into points has uncertainty.
-            The measured angle of the mirror when the laser pulse is emitted has uncertainty.
-            The position and attitude of the plane has uncertainty.
-            All of these factors contribute to some percentage of the total uncertainty in the final x-y-z coordinates of our LiDAR points.
+          As you're seeing, there are a lot of components that go into collecting a single LiDAR measurement, and each one of these components has an associated uncertainty of measurement.
+          Turning our full waveform data into points has uncertainty.
+          The measured angle of the mirror when the laser pulse is emitted has uncertainty.
+          The position and attitude of the plane has uncertainty.
+          All of these factors contribute to some percentage of the total uncertainty in the final x-y-z coordinates of our LiDAR points.
           </p>
 
           <p>
-            When we compute the uncertainty of a computed quantity, the usual procedure is to use the General Law for the Propagation of Variances.<sup id="fnref:4"><a href="#fn:4">4</a></sup>
-            We compute a 3x3 covariance matrix $\mathbf{C}$ for each point using the following relationships:
+          When we compute the uncertainty of a computed quantity, the usual procedure is to use the General Law for the Propagation of Variances.<sup id="fnref:4"><a href="#fn:4">4</a></sup>
+          We compute a 3x3 covariance matrix $\mathbf{C}$ for each point using the following relationships:
 
-            $$ 
-            \mathbf{C} = 
-              \begin{bmatrix}
-                \sigma_x^2 & \sigma_{xy} & \sigma_{xz} \\
-                \sigma_{xy} & \sigma_y^2 & \sigma_{yz} \\
-                \sigma_{xz} & \sigma_{yz} & \sigma_z^2
-              \end{bmatrix}
-              = \mathbf{A} \mathbf{C}_l \mathbf{A}^T
-            $$
+          $$ 
+          \mathbf{C} = 
+          \begin{bmatrix}
+          \sigma_x^2 & \sigma_{xy} & \sigma_{xz} \\
+          \sigma_{xy} & \sigma_y^2 & \sigma_{yz} \\
+          \sigma_{xz} & \sigma_{yz} & \sigma_z^2
+          \end{bmatrix}
+          = \mathbf{A} \mathbf{C}_l \mathbf{A}^T
+          $$
 
-            where $\mathbf{A}$ is the <em>Jacobian</em> matrix of the partial derivatives of the Taylor series expansion of Equation 3, truncated at the first term, and $\mathbf{C}_l$ is the covariance matrix of variances and covariances for each observed quantity.
-              
+          where $\mathbf{A}$ is the <em>Jacobian</em> matrix of the partial derivatives of the Taylor series expansion of Equation 3, truncated at the first term, and $\mathbf{C}_l$ is the covariance matrix of variances and covariances for each observed quantity.
+
           </p>
         </div>
       </div>
@@ -304,23 +304,23 @@ body { position: relative; margin-bottom: 60px; }
           </ul>
 
           <p>
-            We can use these fourteen unknowns to calculate the Jacobian matrix as required for Equation 3.
+          We can use these fourteen unknowns to calculate the Jacobian matrix as required for Equation 3.
           </p>
         </div>
 
-        <div class="col-xs-12 col-md-8 well">
+        <div class="hidden-xs hidden-sm col-lg-8 well">
           <h4>X, as a function of the fourteen unknowns</h4>
           <p>
-            $$
-              \mathbf{X}_0 = \left( \cos\omega \cos\kappa + \sin\phi\sin\omega\sin\kappa \right) \\
-                \left[ \left( \cos d \omega \cos d \kappa + \sin d \phi \sin d \omega \sin d \kappa \right) r \cos \theta +
-                  \left( \cos d \kappa \sin d \omega - \cos d \omega \sin d \phi \sin d \kappa \right) r \sin \theta + \mathbf{X}^l_0 \right] + \\
-                \cos\phi\sin\kappa \\
-                \left[\left(\cos d\kappa \sin d\phi \sin d\omega - \cos d\omega \sin d\kappa \right) r\cos\theta + 
-                  \left(-\sin d\omega \sin d\kappa - \cos d\omega \cos d\kappa \sin d\phi \right) r\sin \theta + \mathbf{X}^l_1 \right] + \\
-                \left(\cos\kappa\sin\omega - \cos\omega\sin\phi\sin\kappa\right)
-                \left[\left(-\sin d\phi \sin d\omega\right) r \cos\theta + \left(\cos d\phi \cos d\omega\right) r \sin\theta + \mathbf{X}^l_2 \right] + \mathbf{X}^g_0
-            $$
+          $$
+          \mathbf{X}_0 = \left( \cos\omega \cos\kappa + \sin\phi\sin\omega\sin\kappa \right) \\
+          \left[ \left( \cos d \omega \cos d \kappa + \sin d \phi \sin d \omega \sin d \kappa \right) r \cos \theta +
+          \left( \cos d \kappa \sin d \omega - \cos d \omega \sin d \phi \sin d \kappa \right) r \sin \theta + \mathbf{X}^l_0 \right] + \\
+          \cos\phi\sin\kappa \\
+          \left[\left(\cos d\kappa \sin d\phi \sin d\omega - \cos d\omega \sin d\kappa \right) r\cos\theta + 
+          \left(-\sin d\omega \sin d\kappa - \cos d\omega \cos d\kappa \sin d\phi \right) r\sin \theta + \mathbf{X}^l_1 \right] + \\
+          \left(\cos\kappa\sin\omega - \cos\omega\sin\phi\sin\kappa\right)
+          \left[\left(-\sin d\phi \sin d\omega\right) r \cos\theta + \left(\cos d\phi \cos d\omega\right) r \sin\theta + \mathbf{X}^l_2 \right] + \mathbf{X}^g_0
+          $$
           </p>
         </div>
       </div>
@@ -328,11 +328,11 @@ body { position: relative; margin-bottom: 60px; }
       <div class="row">
         <div class="col-xs-12">
           <p>
-            Some of the errors, such as those in the position and attitude of the IMU/GNSS system, are products of the IMU/GNSS processing and are available as timestamped records.
-            Other errors must be estimated or measured.
-            Per Glennie, the lever-arm errors are commonly assumed to be about 2cm each, and the boresight errors can be assumed to be 0.001° in roll and pitch and 0.004° in yaw.
-            Errors in the range of scanner measurements are generally a function of the timing circuitry in the scanner are are usually on the order of 1cm to 2cm.
-            Angular errors in the scanner measurements are complicated due to the divergence of the laser beam — Glennie discusses reasonable simplifications to get a single angular value.
+          Some of the errors, such as those in the position and attitude of the IMU/GNSS system, are products of the IMU/GNSS processing and are available as timestamped records.
+          Other errors must be estimated or measured.
+          Per Glennie, the lever-arm errors are commonly assumed to be about 2cm each, and the boresight errors can be assumed to be 0.001° in roll and pitch and 0.004° in yaw.
+          Errors in the range of scanner measurements are generally a function of the timing circuitry in the scanner are are usually on the order of 1cm to 2cm.
+          Angular errors in the scanner measurements are complicated due to the divergence of the laser beam — Glennie discusses reasonable simplifications to get a single angular value.
           </p>
 
           <p>
@@ -347,19 +347,19 @@ body { position: relative; margin-bottom: 60px; }
       <div class="row">
         <div class="col-xs-12">
           <p>
-            The idea that LiDAR scanners measure points in space is a bit of a simplification.
-            To see why, you need to know a bit about how the energy returned to a LiDAR scanner is actually measured.
+          The idea that LiDAR scanners measure points in space is a bit of a simplification.
+          To see why, you need to know a bit about how the energy returned to a LiDAR scanner is actually measured.
           </p>
 
           <p>
-            When laser energy bounces off of a target and returns to the scanner, it passes back through some optics until it hits one or more more detectors.<sup id="fnref:3"><a href="#fn:3">3</a></sup>
-            These detectors are very similar to those that exist in your digital camera — they record the intensity of the incident energy on the detector.
-            The detectors in a LiDAR system are hooked up to some very precise timing machinery that records the time of the data sample with about a nanosecond resolution.
-            This produces a timeseries of samples of the incident energy on the scanner's detector.
+          When laser energy bounces off of a target and returns to the scanner, it passes back through some optics until it hits one or more more detectors.<sup id="fnref:3"><a href="#fn:3">3</a></sup>
+          These detectors are very similar to those that exist in your digital camera — they record the intensity of the incident energy on the detector.
+          The detectors in a LiDAR system are hooked up to some very precise timing machinery that records the time of the data sample with about a nanosecond resolution.
+          This produces a timeseries of samples of the incident energy on the scanner's detector.
           </p>
 
           <p>
-            Some examples of real-world waveform data are shown below.
+          Some examples of real-world waveform data are shown below.
           </p>
         </div>
       </div>
@@ -380,9 +380,9 @@ body { position: relative; margin-bottom: 60px; }
             <div class="caption">
               <h3>Return pulse</h3>
               <p>
-                The energy of the laser pulse as it returns to the scanner.
-                The scanner that collected these data has two channels, high and low, one which is more sensitive than the other.
-                Notice the multiple peaks in the low channel, indicating that this laser pulse interacted with multiple targets.
+              The energy of the laser pulse as it returns to the scanner.
+              The scanner that collected these data has two channels, high and low, one which is more sensitive than the other.
+              Notice the multiple peaks in the low channel, indicating that this laser pulse interacted with multiple targets.
               </p>
             </div>
           </div>
@@ -398,8 +398,8 @@ body { position: relative; margin-bottom: 60px; }
           </p>
 
           <p>
-            For this work, we use a simple peak detection method to convert our full waveform data to discrete points.
-            We would have loved to implement a full Gaussian decomposition, but we ran out of time.
+          For this work, we use a simple peak detection method to convert our full waveform data to discrete points.
+          We would have loved to implement a full Gaussian decomposition, but we ran out of time.
           </p>
         </div>
       </div>
@@ -409,30 +409,30 @@ body { position: relative; margin-bottom: 60px; }
       <div class="row">
         <div class="col-xs-12">
           <p>
-            We focused on a single 2015 flightline taken in the Uncompahgre region of southwestern Colorado for our test data.
+          We focused on a single 2015 flightline taken in the Uncompahgre region of southwestern Colorado for our test data.
           </p>
           <p>
-            Due to lack of discrete-return data in the products provided by ASO (as of the time of this writing), we were forced to implement our own custom full-waveform decomposition in addition to georeferencing.
-            This was no small task, and our waveform decomposition process is not complete to a satisfactory level.
-            However, we used data provided by the decomposition to demonstrate error propagation anyways.
-          </p>
-
-          <p>
-            We analytically solved the partial derivatives required for each entry in the Jacobian matrix.
-            Due to time constraints, we excluded the contributions in error provided by the boresight alignment and the lever arm measurements.
-            As these errors are just approximated based upon user experience (Glennie 2007) we did not consider them necessary for this proof-of-concept project.
+          Due to lack of discrete-return data in the products provided by ASO (as of the time of this writing), we were forced to implement our own custom full-waveform decomposition in addition to georeferencing.
+          This was no small task, and our waveform decomposition process is not complete to a satisfactory level.
+          However, we used data provided by the decomposition to demonstrate error propagation anyways.
           </p>
 
           <p>
-            We also did not take into account any local terrain effects on the error in the point.
-            This was due to both time constraints and the poor quality of our georeferenced data.
-            Per Hartzell et al. terrain effects can have a significant and interesting effect on per-point errors, and so should be considered in the future.
+          We analytically solved the partial derivatives required for each entry in the Jacobian matrix.
+          Due to time constraints, we excluded the contributions in error provided by the boresight alignment and the lever arm measurements.
+          As these errors are just approximated based upon user experience (Glennie 2007) we did not consider them necessary for this proof-of-concept project.
           </p>
 
           <p>
-            Finally, we did not include dynamic GNSS/IMU error information in this final product.
-            We wanted to, but we ran out of time.
-            Sorry.
+          We also did not take into account any local terrain effects on the error in the point.
+          This was due to both time constraints and the poor quality of our georeferenced data.
+          Per Hartzell et al. terrain effects can have a significant and interesting effect on per-point errors, and so should be considered in the future.
+          </p>
+
+          <p>
+          Finally, we did not include dynamic GNSS/IMU error information in this final product.
+          We wanted to, but we ran out of time.
+          Sorry.
           </p>
 
         </div>
@@ -443,7 +443,7 @@ body { position: relative; margin-bottom: 60px; }
             <div class="caption">
               <h3>$\sigma_x$</h3>
               <p>
-                Error (one sigma) in the x direction.
+              Error (one sigma) in the x direction.
               </p>
             </div>
           </div>
@@ -454,7 +454,7 @@ body { position: relative; margin-bottom: 60px; }
             <div class="caption">
               <h3>$\sigma_y$</h3>
               <p>
-                Error (one sigma) in the y direction.
+              Error (one sigma) in the y direction.
               </p>
             </div>
           </div>
@@ -465,18 +465,17 @@ body { position: relative; margin-bottom: 60px; }
             <div class="caption">
               <h3>$\sigma_z$</h3>
               <p>
-                Error (one sigma) in the z direction.
+              Error (one sigma) in the z direction.
               </p>
             </div>
           </div>
         </div>
-      </div>
-
-      <div class="col-xs-12">
-        <p>
+        <div class="col-xs-12">
+          <p>
           Due to the poor nature of our full-waveform decomposition, we did not attempt to validate these data with other georeferenced data provided by ASO, nor did we use these data to calculate any derivative products (e.g. snow depths and SWE).
           More work needs to be done on the processing end, or better data is needed, before any reasonable snowpack properties can be calculated.
-        </p>
+          </p>
+        </div>
       </div>
 
       <h1 id="work">Summary and future work</h1>
@@ -485,13 +484,14 @@ body { position: relative; margin-bottom: 60px; }
         <div class="col-xs-12">
 
           <p>
-            We implemented custom peak detection<sup id="fnref:6"><a href="#fn:6">7</a></sup> for sdf files<sup id="fnref:7"><a href="#fn:7">7</a></sup>, one of Riegl's full-waveform data formats.
-            We implemented georeferencing<sup id="fnref:8"><a href="#fn:8">8</a></sup> and demonstrated its correctness using another airborne discrete-point dataset.
-            We then applied this georeferencing solution to airborne LiDAR data from ASO and propagated component uncertainties through to the final point cloud product.
+          We implemented custom peak detection<sup id="fnref:6"><a href="#fn:6">7</a></sup> for sdf files<sup id="fnref:7"><a href="#fn:7">7</a></sup>, one of Riegl's full-waveform data formats.
+          We implemented georeferencing<sup id="fnref:8"><a href="#fn:8">8</a></sup> and demonstrated its correctness using another airborne discrete-point dataset.
+          We then applied this georeferencing solution to airborne LiDAR data from ASO and propagated component uncertainties through to the final point cloud product.
           </p>
 
           <p>
           Future work:
+          </p>
           <ul>
             <li>Propagate errors all the way through to snow depths and SWE measurements.</li>
             <li>Improve custom full-waveform processing.</li>
@@ -500,7 +500,6 @@ body { position: relative; margin-bottom: 60px; }
             <li>Include all components of error, and include terrain effects.</li>
           </ul>
 
-          </p>
 
         </div>
       </div>
@@ -530,44 +529,44 @@ body { position: relative; margin-bottom: 60px; }
 
       <div class="footnotes">
         <ol>
-        <li class="footnote" id="fn:1">
-          Glennie, C. L. (2007). Rigorous 3D error analysis of kinematic scanning LIDAR systems. Journal of Applied Geodesy, 1(3).
-          <a href="#fnref:1" title="return to content"> &#8617;</a>
-        </li>
-        <li class="footnote" id="fn:2">
-          Since LiDAR points are not collected at evenly spaced intervals in time, GNSS/IMU measurements must be interpolated.
-          <a href="#fnref:2" title="return to content"> &#8617;</a>
-        </li>
-        <li class="footnote" id="fn:3">
-           The scanner that we used has two channels, one which is more sensitive than the other. 
-           This is to provide a wider dynamic range for signal detection.
-          <a href="#fnref:3" title="return to content"> &#8617;</a>
-        </li>
-        <li class="footnote" id="fn:4">
-          Ghilani, C. D. (2010). Adjustment Computations.
-          <a href="#fnref:4" title="return to content"> &#8617;</a>
-        </li>
-        <li class="footnote" id="fn:5">
-          <a href="http://www.wcc.nrcs.usda.gov/snow/">http://www.wcc.nrcs.usda.gov/snow/</a>
-          <a href="#fnref:5" title="return to content"> &#8617;</a>
-        </li>
-        <li class="footnote" id="fn:6">
-          <a href="https://github.com/gadomski/peakbag">https://github.com/gadomski/peakbag</a>
-          <a href="#fnref:6" title="return to content"> &#8617;</a>
-        </li>
-        <li class="footnote" id="fn:7">
-          <a href="https://github.com/gadomski/sdf-rs">https://github.com/gadomski/sdf-rs</a>
-          <a href="#fnref:7" title="return to content"> &#8617;</a>
-        </li>
-        <li class="footnote" id="fn:8">
-          <a href="https://github.com/gadomski/georef">https://github.com/gadomski/georef</a>
-          <a href="#fnref:8" title="return to content"> &#8617;</a>
-        </li>
-        <li class="footnote" id="fn:9">
-          Hartzell, P. J., Gadomski, P. J., Glennie, C. L., Finnegan, C., & Deems, J. S. (2015). Rigorous Error Propagation for Terrestrial Laser Scanning with Application to Snow Volume Uncertainty.
-          <a href="#fnref:9" title="return to content"> &#8617;</a>
-        </li>
-      </ol>
+          <li class="footnote" id="fn:1">
+            Glennie, C. L. (2007). Rigorous 3D error analysis of kinematic scanning LIDAR systems. Journal of Applied Geodesy, 1(3).
+            <a href="#fnref:1" title="return to content"> &#8617;</a>
+          </li>
+          <li class="footnote" id="fn:2">
+            Since LiDAR points are not collected at evenly spaced intervals in time, GNSS/IMU measurements must be interpolated.
+            <a href="#fnref:2" title="return to content"> &#8617;</a>
+          </li>
+          <li class="footnote" id="fn:3">
+            The scanner that we used has two channels, one which is more sensitive than the other. 
+            This is to provide a wider dynamic range for signal detection.
+            <a href="#fnref:3" title="return to content"> &#8617;</a>
+          </li>
+          <li class="footnote" id="fn:4">
+            Ghilani, C. D. (2010). Adjustment Computations.
+            <a href="#fnref:4" title="return to content"> &#8617;</a>
+          </li>
+          <li class="footnote" id="fn:5">
+            <a href="http://www.wcc.nrcs.usda.gov/snow/">http://www.wcc.nrcs.usda.gov/snow/</a>
+            <a href="#fnref:5" title="return to content"> &#8617;</a>
+          </li>
+          <li class="footnote" id="fn:6">
+            <a href="https://github.com/gadomski/peakbag">https://github.com/gadomski/peakbag</a>
+            <a href="#fnref:6" title="return to content"> &#8617;</a>
+          </li>
+          <li class="footnote" id="fn:7">
+            <a href="https://github.com/gadomski/sdf-rs">https://github.com/gadomski/sdf-rs</a>
+            <a href="#fnref:7" title="return to content"> &#8617;</a>
+          </li>
+          <li class="footnote" id="fn:8">
+            <a href="https://github.com/gadomski/georef">https://github.com/gadomski/georef</a>
+            <a href="#fnref:8" title="return to content"> &#8617;</a>
+          </li>
+          <li class="footnote" id="fn:9">
+            Hartzell, P. J., Gadomski, P. J., Glennie, C. L., Finnegan, C., & Deems, J. S. (2015). Rigorous Error Propagation for Terrestrial Laser Scanning with Application to Snow Volume Uncertainty.
+            <a href="#fnref:9" title="return to content"> &#8617;</a>
+          </li>
+        </ol>
       </div>
     </div>
 
