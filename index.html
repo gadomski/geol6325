@@ -109,10 +109,13 @@ body { position: relative; margin-bottom: 60px; }
 
       <hr>
         
-      <h1 id="snow-depths-and-densities">Calculating depths and densities</h1>
+      <h1 id="snow-depths-and-densities">Calculating snow depths and densities</h1>
+
+      <p>SWE is depth times density. In order to calculate SWE, we need to measure both.</p>
 
       <div class="row">
         <div class="col-xs-12">
+          <h2>Snow depth <small>pretty straightforward</small></h2>
           <p>
           We can calculate snow depths from LiDAR data by comparing snow-free and snow-on scans.
           These data are provided by the <a href="http://aso.jpl.nasa.gov/">Airborne Snow Observatory</a>.
@@ -161,6 +164,7 @@ body { position: relative; margin-bottom: 60px; }
 
         <div class="row">
           <div class="col-xs-12">
+            <h2>Snow density <small>tough to measure</small></h2>
             <p>
             The Natural Resources Conservation Service maintains a network of remote snow monitoring stations called SNOTEL sites.<sup id="fnref:5"><a href="#fn:5">5</a></sup>
             Included in the SNOTEL data products are snow depth and SWE (snow-water equivalent, i.e. the height of water that would be left if you melted a given depth of snow) calculations.
@@ -400,38 +404,104 @@ body { position: relative; margin-bottom: 60px; }
         </div>
       </div>
 
-      <h1 id="work">Work completed and future work</h1>
+      <h1 id="results">Results</h1>
 
       <div class="row">
         <div class="col-xs-12">
           <p>
-          Unfortunately, I was not able to complete my objective of propagating errors through to final snow depth and snow water equivalent data products.
-          I am using data from the Airborne Snow Observatory collected in the 2013 and 2014 snow years, and those data that were provided to me did not include an vital intermediate data product (*.sdc files, which are the discretized and georeferenced point cloud data).
-          These data were also incomplete enough that I was unable to process them using Riegl's proprietary software.
-          Therefore, while I waited on a as-of-yet unfulfilled request for additional data from ASO, I (perhaps unwisely) undertook to implement my own full-waveform peak detection and georeferencing software.
+            We focused on a single 2015 flightline taken in the Uncompahgre region of southwestern Colorado for our test data.
+          </p>
+          <p>
+            Due to lack of discrete-return data in the products provided by ASO (as of the time of this writing), we were forced to implement our own custom full-waveform decomposition in addition to georeferencing.
+            This was no small task, and our waveform decomposition process is not complete to a satisfactory level.
+            However, we used data provided by the decomposition to demonstrate error propagation anyways.
           </p>
 
+          <p>
+            We analytically solved the partial derivatives required for each entry in the Jacobian matrix.
+            Due to time constraints, we excluded the contributions in error provided by the boresight alignment and the lever arm measurements.
+            As these errors are just approximated based upon user experience (Glennie 2007) we did not consider them necessary for this proof-of-concept project.
+          </p>
+
+          <p>
+            We also did not take into account any local terrain effects on the error in the point.
+            This was due to both time constraints and the poor quality of our georeferenced data.
+            Per Hartzell et al. terrain effects can have a significant and interesting effect on per-point errors, and so should be considered in the future.
+          </p>
+
+          <p>
+            Finally, we did not include dynamic GNSS/IMU error information in this final product.
+            We wanted to, but we ran out of time.
+            Sorry.
+          </p>
+
+        </div>
+
+        <div class="col-sm-12">
           <div class="thumbnail">
-            <img src="images/girdwood.png" alt="girdwood">
+            <img src="images/sigma-x.png">
             <div class="caption">
-              <h3>Georeferenced point cloud</h3>
+              <h3>$\sigma_x$</h3>
               <p>
-                Georeferenced point cloud from a mobile data collect in Girdwood, Alaska.
-                These data were produced by our custom georeferencing software.          
+                Error (one sigma) in the x direction.
               </p>
             </div>
           </div>
+        </div>
+        <div class="col-sm-12">
+          <div class="thumbnail">
+            <img src="images/sigma-y.png">
+            <div class="caption">
+              <h3>$\sigma_y$</h3>
+              <p>
+                Error (one sigma) in the y direction.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <div class="thumbnail">
+            <img src="images/sigma-z.png">
+            <div class="caption">
+              <h3>$\sigma_z$</h3>
+              <p>
+                Error (one sigma) in the z direction.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12">
+        <p>
+          Due to the poor nature of our full-waveform decomposition, we did not attempt to validate these data with other georeferenced data provided by ASO, nor did we use these data to calculate any derivative products (e.g. snow depths and SWE).
+          More work needs to be done on the processing end, or better data is needed, before any reasonable snowpack properties can be calculated.
+        </p>
+      </div>
+
+      <h1 id="work">Summary and future work</h1>
+
+      <div class="row">
+        <div class="col-xs-12">
 
           <p>
-            I was able to make good headway on the problem.
-            I implemented custom peak detection<sup id="fnref:6"><a href="#fn:6">7</a></sup> for sdf files<sup id="fnref:7"><a href="#fn:7">7</a></sup>, one of Riegl's full-waveform data formats.
-            I implemented georeferencing<sup id="fnref:8"><a href="#fn:8">8</a></sup> and demonstrated its correctness using another airborne discrete-point dataset.
-            However, the integration of my full-waveform ASO data and my georeferencing package is, as of this writing, not working.
+            We implemented custom peak detection<sup id="fnref:6"><a href="#fn:6">7</a></sup> for sdf files<sup id="fnref:7"><a href="#fn:7">7</a></sup>, one of Riegl's full-waveform data formats.
+            We implemented georeferencing<sup id="fnref:8"><a href="#fn:8">8</a></sup> and demonstrated its correctness using another airborne discrete-point dataset.
+            We then applied this georeferencing solution to airborne LiDAR data from ASO and propagated component uncertainties through to the final point cloud product.
           </p>
 
           <p>
-            Future work includes, of course, to either correctly georeference the full-waveform ASO data, or to get processed discrete-return data from ASO, which can then be used to complete the project objectives.
+          Future work:
+          <ul>
+            <li>Propagate errors all the way through to snow depths and SWE measurements.</li>
+            <li>Improve custom full-waveform processing.</li>
+            <li>Implement Multiple-Time-Around calculations.</li>
+            <li>Improve software engineering so that it is easier to apply georeferencing solutions to other datasets.</li>
+            <li>Include all components of error, and include terrain effects.</li>
+          </ul>
+
           </p>
+
         </div>
       </div>
 
@@ -509,7 +579,8 @@ body { position: relative; margin-bottom: 60px; }
           <li><a href="#why-error">Why error propagation?</a></li>
           <li><a href="#snow-depths-and-densities">Snow depths and densities</a></li>
           <li><a href="#lidar">LiDAR</a></li>
-          <li><a href="#work">Work completed and future work</a></li>
+          <li><a href="#results">Results</a></li>
+          <li><a href="#work">Summary and future work</a></li>
         </ul>
       </div>
     </nav>

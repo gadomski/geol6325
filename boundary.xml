@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Pipeline version="1.0">
+    <Filter type="filters.hexbin">
+      <Option name="threshold">10</Option>
+      <Reader type="readers.las">
+        <Option name="filename">
+            /Volumes/avery/ASO/2015.snowon/uncompahgreCO/USCOUB20150429f1a1/products/las/filtered_las/USCOUB20150429f1a1\ -\ Scanner\ 1\ -\ 150429_153040_1\ -\ originalpoints_dem_filter.las
+        </Option>
+      </Reader>
+    </Filter>
+</Pipeline>
